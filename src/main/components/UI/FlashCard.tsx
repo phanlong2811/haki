@@ -50,6 +50,10 @@ export default function FlashCard({
         style={{
           position: 'relative',
           zIndex: 1,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
         }}
       >
         <Header as="h1" color="yellow">
