@@ -1,5 +1,5 @@
 import {
-  Button,
+Button,
   Container,
   Header,
   Icon,
@@ -31,7 +31,7 @@ export default function FlashCard({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'space-between',
+        justifyContent: 'between',
         height: 0,
       }}
     >
