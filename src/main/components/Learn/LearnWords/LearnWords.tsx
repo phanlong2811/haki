@@ -14,12 +14,6 @@ function LearnWords() {
         wordDefinition="Day la dinh nghia cua tu"
         imageLink="https://code.org/images/social-media/helloworld-og-image-1200x630.png"
       />
-      <FlashCard
-        vocabWord="a"
-        wordType="(adv)"
-        wordDefinition="Day la dinh nghia cua tu thu 2"
-        imageLink="https://www.freecodecamp.org/news/content/images/size/w2000/2020/12/fcc-bg-image-2.png"
-      />
     </>
   );
 }

@@ -1,7 +1,6 @@
 import {
   Button,
   Container,
-  Divider,
   Header,
   Icon,
   Segment,
@@ -13,6 +12,7 @@ interface IFlashCard {
   wordDefinition: string;
   imageLink?: string;
 }
+
 export default function FlashCard({
   vocabWord,
   wordType,
@@ -22,22 +22,60 @@ export default function FlashCard({
   return (
     <Segment
       textAlign="center"
-      color="red"
       style={{
+        position: 'relative',
         backgroundImage: `url(${imageLink})`,
         backgroundSize: `auto`,
         color: `white`,
+        paddingBottom: `40%`,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        height: 0,
       }}
     >
-      <Container textAlign="center">
+      <div
+        style={{
+          position: 'absolute',
+          top: 0,
+          bottom: 0,
+          left: 0,
+          right: 0,
+          backgroundColor: 'rgba(0,0,0,0.5)',
+        }}
+      />
+      <Container
+        textAlign="center"
+        style={{
+          position: 'relative',
+          zIndex: 1,
+        }}
+      >
         <Header as="h1" color="yellow">
           {vocabWord}
         </Header>
         <h3>{wordType}</h3>
-        <p>{wordDefinition}</p>
+        <p
+          style={{
+            backgroundColor: 'black',
+            color: 'white',
+            padding: '1em',
+            borderRadius: '1em',
+          }}
+        >
+          {wordDefinition}
+        </p>
       </Container>
-      <Divider hidden />
-      <Button animated floated="right" primary>
+      <Button
+        animated
+        primary
+        style={{
+          position: 'absolute',
+          bottom: 10,
+          right: 10,
+        }}
+      >
         <Button.Content visible>Review tomorrow</Button.Content>
         <Button.Content hidden>
           <Icon name="arrow right" />
