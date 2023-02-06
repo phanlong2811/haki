@@ -6,6 +6,7 @@ import { Container, Divider } from 'semantic-ui-react';
 import LearnWords from 'main/components/Learn/LearnWords';
 import Explore from 'main/components/Explore';
 import React, { useState } from 'react';
+import RevealWords from 'main/components/Reveal/RevealWords';
 
 export default function App() {
   const [activeItem, setActiveItem] = useState('learn');
@@ -31,6 +32,7 @@ export default function App() {
             element={<Learn />}
           />
           <Route path="/learn-words" element={<LearnWords />} />
+          <Route path="/reveal-words" element={<RevealWords />} />
           <Route path="/explore" element={<Explore />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
@@ -38,3 +40,4 @@ export default function App() {
     </>
   );
 }
+

@@ -65,7 +65,12 @@ function GridExampleDividedPhrase() {
             </Card.Content>
             <Card.Content extra>
               <div className="ui two buttons">
-                <Button inverted color="green">
+                <Button 
+                inverted
+                as={Link}
+                to="/reveal-words"
+                icon="right arrow"
+                color="green">
                   Start
                 </Button>
               </div>
