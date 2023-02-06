@@ -25,11 +25,6 @@ function GridExampleDividedPhrase() {
         <Card.Group centered itemsPerRow={3}>
           <Card>
             <Card.Content>
-              <Image
-                floated="right"
-                size="mini"
-                src="https://react.semantic-ui.com/images/avatar/large/steve.jpg"
-              />
               <Card.Header>Ôn tập lại các từ vựng</Card.Header>
               <Card.Meta>500 từ</Card.Meta>
               <Card.Description>
@@ -52,11 +47,6 @@ function GridExampleDividedPhrase() {
           </Card>
           <Card>
             <Card.Content>
-              <Image
-                floated="right"
-                size="mini"
-                src="https://react.semantic-ui.com/images/avatar/large/molly.png"
-              />
               <Card.Header>Khám phá các từ mới</Card.Header>
               <Card.Meta>100 từ</Card.Meta>
               <Card.Description>
@@ -73,11 +63,6 @@ function GridExampleDividedPhrase() {
           </Card>
           <Card>
             <Card.Content>
-              <Image
-                floated="right"
-                size="mini"
-                src="https://react.semantic-ui.com/images/avatar/large/jenny.jpg"
-              />
               <Card.Header>
                 <Icon name="check circle" color="green" />
                 Xem phim

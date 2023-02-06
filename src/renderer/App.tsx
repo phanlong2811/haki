@@ -6,9 +6,11 @@ import { Container, Divider } from 'semantic-ui-react';
 import LearnWords from 'main/components/Learn/LearnWords';
 import Explore from 'main/components/Explore';
 import React, { useState } from 'react';
+import SearchWord from 'main/components/SearchWord';
 
 export default function App() {
   const [activeItem, setActiveItem] = useState('learn');
+  const [isSearchWord, setSearchWord] = useState<boolean>(false);
   const location = useLocation();
 
   React.useEffect(() => {
@@ -20,21 +22,21 @@ export default function App() {
   }, [location]);
   return (
     <>
-      <MenuBar activeItem={activeItem} setActiveItem={setActiveItem} />
+      <MenuBar
+        activeItem={activeItem}
+        setActiveItem={setActiveItem}
+        setSearchWord={setSearchWord}
+      />
       <Divider hidden />
-
       <Container>
         <Routes>
-          <Route
-            path="/"
-            onEnter={() => setActiveItem('learn')}
-            element={<Learn />}
-          />
+          <Route path="/" element={<Learn />} />
           <Route path="/learn-words" element={<LearnWords />} />
           <Route path="/explore" element={<Explore />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Container>
+      <SearchWord isSearchWord={isSearchWord} setSearchWord={setSearchWord} />
     </>
   );
 }

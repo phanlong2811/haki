@@ -1,8 +1,18 @@
 import { Input, Label, Menu, MenuItemProps } from 'semantic-ui-react';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import SearchWord from './SearchWord';
 
-export default function MenuBar({ activeItem, setActiveItem }) {
+interface IMenuBar {
+  activeItem: string;
+  setActiveItem: any;
+  setSearchWord: any;
+}
+export default function MenuBar({
+  activeItem,
+  setActiveItem,
+  setSearchWord,
+}: IMenuBar) {
   const handleItemClick: Function = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
     { name }: MenuItemProps
@@ -27,7 +37,17 @@ export default function MenuBar({ activeItem, setActiveItem }) {
 
         <Menu.Menu position="right">
           <Menu.Item>
-            <Input icon="search" placeholder="Search..." size="mini" />
+            <Input
+              onClick={() => {
+                setSearchWord(true);
+              }}
+              style={{
+                cursor: `pointer`,
+              }}
+              icon="search"
+              placeholder="Search or add new word..."
+              size="mini"
+            />
           </Menu.Item>
           <Menu.Item
             name="help"

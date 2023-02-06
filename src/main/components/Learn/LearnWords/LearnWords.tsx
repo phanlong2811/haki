@@ -15,20 +15,28 @@ function LearnWords() {
           wordDefinition="a sample program designed to familiarize users with most programming languages"
           imageLink="https://code.org/images/social-media/helloworld-og-image-1200x630.png"
         />
-        <Button
-          animated
-          primary
+        <div
           style={{
             position: 'absolute',
-            bottom: 30,
-            right: 30,
+            bottom: 50,
+            left: 0,
+            right: 0,
+            textAlign: 'center',
           }}
         >
-          <Button.Content visible>Review tomorrow</Button.Content>
-          <Button.Content hidden>
-            <Icon name="arrow right" />
-          </Button.Content>
-        </Button>
+          <Button animated primary>
+            <Button.Content visible>Should learn</Button.Content>
+            <Button.Content hidden>
+              <Icon name="arrow right" />
+            </Button.Content>
+          </Button>
+          <Button animated>
+            <Button.Content visible>Already Knew</Button.Content>
+            <Button.Content hidden>
+              <Icon name="arrow right" />
+            </Button.Content>
+          </Button>
+        </div>
       </Segment>
     </>
   );
