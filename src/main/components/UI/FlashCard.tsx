@@ -8,8 +8,7 @@ export default function FlashCard({
   imageLink,
 }: IFlashCard) {
   return (
-    <Segment
-      textAlign="center"
+    <div
       style={{
         position: 'relative',
         backgroundImage: `url(${imageLink})`,
@@ -69,20 +68,6 @@ export default function FlashCard({
           )}
         </Container>
       </div>
-      <Button
-        animated
-        primary
-        style={{
-          position: 'absolute',
-          bottom: 10,
-          right: 10,
-        }}
-      >
-        <Button.Content visible>Review tomorrow</Button.Content>
-        <Button.Content hidden>
-          <Icon name="arrow right" />
-        </Button.Content>
-      </Button>
-    </Segment>
+    </div>
   );
 }

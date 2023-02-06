@@ -2,8 +2,7 @@ import { Input, Label, Menu, MenuItemProps } from 'semantic-ui-react';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-export default function MenuBar() {
-  const [activeItem, setActiveItem] = useState('learn');
+export default function MenuBar({ activeItem, setActiveItem }) {
   const handleItemClick: Function = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
     { name }: MenuItemProps
