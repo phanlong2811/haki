@@ -1,9 +1,9 @@
 import './App.css';
 import MenuBar from 'main/components/MenuBar';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
-import Learn from 'main/components/Learn/Learn';
+import Home from 'main/components/Home';
 import { Container, Divider } from 'semantic-ui-react';
-import LearnWords from 'main/components/Learn/LearnWords';
+import Review from 'main/components/Review';
 import Explore from 'main/components/Explore';
 import React, { useState } from 'react';
 import SearchWord from 'main/components/SearchWord';
@@ -15,9 +15,11 @@ export default function App() {
 
   React.useEffect(() => {
     if (location.pathname === '/') {
-      setActiveItem('learn');
+      setActiveItem('home');
     } else if (location.pathname === '/explore') {
       setActiveItem('explore');
+    } else if (location.pathname === '/review') {
+      setActiveItem('review');
     }
   }, [location]);
   return (
@@ -30,8 +32,8 @@ export default function App() {
       <Divider hidden />
       <Container>
         <Routes>
-          <Route path="/" element={<Learn />} />
-          <Route path="/learn-words" element={<LearnWords />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/review" element={<Review />} />
           <Route path="/explore" element={<Explore />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

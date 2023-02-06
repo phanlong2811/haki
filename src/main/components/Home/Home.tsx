@@ -33,13 +33,7 @@ function GridExampleDividedPhrase() {
             </Card.Content>
             <Card.Content extra>
               <div className="ui two buttons">
-                <Button
-                  inverted
-                  as={Link}
-                  to="/learn-words"
-                  icon="right arrow"
-                  color="green"
-                >
+                <Button inverted as={Link} to="/review" color="green">
                   Start
                 </Button>
               </div>
@@ -55,7 +49,7 @@ function GridExampleDividedPhrase() {
             </Card.Content>
             <Card.Content extra>
               <div className="ui two buttons">
-                <Button inverted color="green">
+                <Button inverted as={Link} to="/explore" color="green">
                   Start
                 </Button>
               </div>
@@ -94,7 +88,7 @@ function GridExampleDividedPhrase() {
   );
 }
 
-export default function Learn() {
+export default function Home() {
   return (
     <>
       <Grid columns={1} textAlign="center">

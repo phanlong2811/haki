@@ -2,7 +2,7 @@ import FlashCard from 'main/components/UI/FlashCard';
 import { Link } from 'react-router-dom';
 import { Button, Icon, Segment } from 'semantic-ui-react';
 
-function LearnWords() {
+function Review() {
   return (
     <>
       <Button as={Link} to="/">
@@ -41,4 +41,4 @@ function LearnWords() {
     </>
   );
 }
-export default LearnWords;
+export default Review;

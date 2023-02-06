@@ -1,7 +1,6 @@
 import { Input, Label, Menu, MenuItemProps } from 'semantic-ui-react';
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import SearchWord from './SearchWord';
 
 interface IMenuBar {
   activeItem: string;
@@ -21,11 +20,18 @@ export default function MenuBar({
     <div style={{ backgroundColor: `white` }}>
       <Menu pointing secondary stackable>
         <Menu.Item
-          name="learn"
+          name="home"
           as={Link}
           onClick={handleItemClick}
-          active={activeItem === 'learn'}
+          active={activeItem === 'home'}
           to="/"
+        />
+        <Menu.Item
+          name="review"
+          as={Link}
+          onClick={handleItemClick}
+          active={activeItem === 'review'}
+          to="/review"
         />
         <Menu.Item
           name="explore"

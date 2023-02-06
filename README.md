@@ -3,7 +3,7 @@ Haki - an application help you learn English word
 
 
 ### Todo
-- [ ] Đổi menu thành 3 tabs: Home, Review, Explore
+- [x] Đổi menu thành 3 tabs: Home, Review, Explore
 - [ ] Tab Review:
     - [ ] Nếu 1 từ đến ngày review mà không được review thì deadline bị lùi lại 1 ngày
     - 1. Trắc nghiệm 4 đáp án
