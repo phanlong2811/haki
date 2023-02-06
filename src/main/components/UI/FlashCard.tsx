@@ -54,17 +54,19 @@ export default function FlashCard({
             {vocabWord}
           </Header>
           <h5>{wordType}</h5>
-          <p
-            style={{
-              backgroundColor: 'black',
-              color: 'white',
-              padding: '1em',
-              borderRadius: '1em',
-              fontSize: '15px',
-            }}
-          >
-            {wordDefinition}
-          </p>
+          {wordDefinition && (
+            <p
+              style={{
+                backgroundColor: 'black',
+                color: 'white',
+                padding: '1em',
+                borderRadius: '1em',
+                fontSize: '16px',
+              }}
+            >
+              {wordDefinition}
+            </p>
+          )}
         </Container>
       </div>
       <Button
