@@ -9,9 +9,9 @@ function LearnWords() {
         <Icon name="angle double left" /> Back to Home screen
       </Button>
       <FlashCard
-        vocabWord="word"
-        wordType="(n)"
-        wordDefinition="Day la dinh nghia cua tu"
+        vocabWord="Hello World"
+        wordType="(code)"
+        wordDefinition="a sample program designed to familiarize users with most programming languages"
         imageLink="https://code.org/images/social-media/helloworld-og-image-1200x630.png"
       />
     </>
