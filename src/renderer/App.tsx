@@ -2,16 +2,9 @@ import './App.css';
 import MenuBar from 'main/components/MenuBar';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Learn from 'main/components/Learn/Learn';
-import { Container, Divider, Grid, Statistic } from 'semantic-ui-react';
+import { Container, Divider } from 'semantic-ui-react';
 import LearnWords from 'main/components/Learn/LearnWords';
-
-function Explore() {
-  return (
-    <h2>
-      <a href="https://www.facebook.com/">Click me</a>
-    </h2>
-  );
-}
+import Explore from 'main/components/Explore';
 
 export default function App() {
   return (
