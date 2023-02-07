@@ -7,6 +7,8 @@ import Review from 'main/components/Review';
 import Explore from 'main/components/Explore';
 import React, { useState } from 'react';
 import SearchWord from 'main/components/SearchWord';
+import Browser from 'main/components/Browser';
+import NewWord from 'main/components/NewWord';
 
 export default function App() {
   const [activeItem, setActiveItem] = useState('learn');
@@ -20,6 +22,11 @@ export default function App() {
       setActiveItem('explore');
     } else if (location.pathname === '/review') {
       setActiveItem('review');
+    } else if (
+      location.pathname === '/browser' ||
+      location.pathname === '/browser/add'
+    ) {
+      setActiveItem('browser');
     }
   }, [location]);
   return (
@@ -33,8 +40,12 @@ export default function App() {
       <Container>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/review" element={<Review />} />
-          <Route path="/explore" element={<Explore />} />
+          <Route path="review" element={<Review />} />
+          <Route path="explore" element={<Explore />} />
+          <Route path="browser">
+            <Route index element={<Browser />} />
+            <Route path="add" element={<NewWord />} />
+          </Route>
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Container>

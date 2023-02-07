@@ -1,12 +1,8 @@
 import { Input, Label, Menu, MenuItemProps } from 'semantic-ui-react';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import IMenuBar from 'main/interfaces/MenuBar';
 
-interface IMenuBar {
-  activeItem: string;
-  setActiveItem: any;
-  setSearchWord: any;
-}
 export default function MenuBar({
   activeItem,
   setActiveItem,
@@ -40,6 +36,13 @@ export default function MenuBar({
           active={activeItem === 'explore'}
           to="/explore"
         />
+        <Menu.Item
+          name="browser"
+          as={Link}
+          onClick={handleItemClick}
+          active={activeItem === 'browser'}
+          to="/browser"
+        />
 
         <Menu.Menu position="right">
           <Menu.Item>
@@ -60,11 +63,6 @@ export default function MenuBar({
             active={activeItem === 'help'}
             onClick={handleItemClick}
           />
-          <Menu.Item>
-            <Label color="yellow" image>
-              Admin
-            </Label>
-          </Menu.Item>
         </Menu.Menu>
       </Menu>
     </div>

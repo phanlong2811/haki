@@ -18,3 +18,5 @@ Haki - an application help you learn English word
     - Nếu không có: Thêm nút button cho người dùng thêm từ vào danh sách và bắt đầu học 1 ngày sau - 2 ngày - 1 tuần - 2 tuần - 1 tháng.
 
 - [ ] Dựng database và connect vào ứng dụng
+
+- [ ] Tab Browser : Giống như Anki, cho phép quản lý database dưới dạng bảng, thêm, sửa, xóa

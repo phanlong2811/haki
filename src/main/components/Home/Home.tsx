@@ -13,7 +13,7 @@ import {
   Statistic,
 } from 'semantic-ui-react';
 
-function GridExampleDividedPhrase() {
+function DashBoard() {
   const [percent, setPercent] = useState<number>(80);
   return (
     <>
@@ -97,7 +97,7 @@ export default function Home() {
         </Grid.Column>
       </Grid>
       <Divider hidden />
-      <GridExampleDividedPhrase />
+      <DashBoard />
     </>
   );
 }

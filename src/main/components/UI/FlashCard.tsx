@@ -1,5 +1,5 @@
 import IFlashCard from 'main/interfaces/FlashCard';
-import { Button, Container, Header, Icon, Segment } from 'semantic-ui-react';
+import { Container, Header } from 'semantic-ui-react';
 
 export default function FlashCard({
   vocabWord,
@@ -14,7 +14,7 @@ export default function FlashCard({
         backgroundImage: `url(${imageLink})`,
         backgroundSize: `auto`,
         color: `white`,
-        paddingBottom: `50%`,
+        paddingBottom: `53%`,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',

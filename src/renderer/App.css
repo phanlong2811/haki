@@ -1,5 +1,14 @@
 @import '~semantic-ui-css/semantic.css';
 
+body::-webkit-scrollbar {
+    width: 5px;
+    background-color: #F5F5F5;
+  }
+  
+body::-webkit-scrollbar-thumb {
+    background-color: #000000;
+    border-radius: 10px;
+}
 body {
     background-image: url('../../assets/background.jpeg'),
 }
