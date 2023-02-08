@@ -1,14 +1,14 @@
 import './App.css';
-import MenuBar from 'main/components/MenuBar';
+import MenuBar from 'components/MenuBar';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
-import Home from 'main/components/Home';
+import Home from 'components/Home';
 import { Container, Divider } from 'semantic-ui-react';
-import Review from 'main/components/Review';
-import Explore from 'main/components/Explore';
+import Review from 'components/Review';
+import Explore from 'components/Explore';
 import React, { useState } from 'react';
-import SearchWord from 'main/components/SearchWord';
-import Browser from 'main/components/Browser';
-import NewWord from 'main/components/NewWord';
+import SearchWord from 'components/SearchWord';
+import Browser from 'components/Browser';
+import NewWord from 'components/NewWord';
 
 export default function App() {
   const [activeItem, setActiveItem] = useState('learn');
