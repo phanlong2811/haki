@@ -12,6 +12,9 @@ export default function NewWord() {
     imageLink:
       'https://code.org/images/social-media/helloworld-og-image-1200x630.png',
   });
+  const addWord = () => {
+    window.electron.ipcRenderer.sendMessage('test-ipc', flashCard);
+  };
   return (
     <Grid columns={2} relaxed="very" stackable>
       <Grid.Column>
@@ -69,7 +72,9 @@ export default function NewWord() {
               }}
             />
           </Form.Field>
-          <Button type="submit">Submit</Button>
+          <Button type="submit" onClick={addWord}>
+            Submit
+          </Button>
         </Form>
       </Grid.Column>
 

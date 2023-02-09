@@ -12,8 +12,10 @@ import path from 'path';
 import { app, BrowserWindow, shell, ipcMain } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
+import IFlashCard from 'interfaces/FlashCard';
 import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
+import { insertWord } from './database';
 
 class AppUpdater {
   constructor() {
@@ -29,6 +31,10 @@ ipcMain.on('ipc-example', async (event, arg) => {
   const msgTemplate = (pingPong: string) => `IPC test: ${pingPong}`;
   console.log(msgTemplate(arg));
   event.reply('ipc-example', msgTemplate('pong'));
+});
+
+ipcMain.on('test-ipc', (event, arg: IFlashCard) => {
+  insertWord(arg);
 });
 
 if (process.env.NODE_ENV === 'production') {

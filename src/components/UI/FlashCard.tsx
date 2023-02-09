@@ -1,4 +1,4 @@
-import IFlashCard from 'main/interfaces/FlashCard';
+import IFlashCard from 'interfaces/FlashCard';
 import { Container, Header } from 'semantic-ui-react';
 
 export default function FlashCard({

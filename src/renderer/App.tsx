@@ -2,7 +2,7 @@ import './App.css';
 import MenuBar from 'components/MenuBar';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import Home from 'components/Home';
-import { Container, Divider } from 'semantic-ui-react';
+import { Button, Container, Divider } from 'semantic-ui-react';
 import Review from 'components/Review';
 import Explore from 'components/Explore';
 import React, { useState } from 'react';
