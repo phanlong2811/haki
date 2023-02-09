@@ -14,7 +14,6 @@ import { Link } from 'react-router-dom';
 function InputCustom({ setSearchWord }) {
   const [inputValue, setInputValue] = useState('');
   const inputRef = useRef();
-
   useEffect(() => {
     inputRef.current.focus();
     inputRef.current.setSelectionRange(0, inputRef.current.value.length);

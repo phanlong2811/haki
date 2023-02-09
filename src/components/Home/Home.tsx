@@ -20,7 +20,6 @@ function DashBoard() {
       <Segment>
         <Header as="h2" content="Today's tasks" />
         <Progress percent={percent} indicating progress />
-        {/* <Button onClick={() => setPercent(percent + 20)}>Increment</Button> */}
         <Divider hidden />
         <Card.Group centered itemsPerRow={3}>
           <Card>

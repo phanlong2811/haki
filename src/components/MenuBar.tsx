@@ -50,9 +50,6 @@ export default function MenuBar({
               onClick={() => {
                 setSearchWord(true);
               }}
-              style={{
-                cursor: `pointer`,
-              }}
               icon="search"
               placeholder="Search or add new word..."
               size="mini"

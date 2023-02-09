@@ -1,10 +1,116 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from 'semantic-ui-react';
+import {
+  Button,
+  Card,
+  Divider,
+  Grid,
+  Input,
+  Label,
+  Table,
+} from 'semantic-ui-react';
 
 export default function Browser() {
+  const [tableData, setTableData] = useState([]);
+  const [searchPrompt, setSearchPrompt] = useState<string>('');
+  window.electron.ipcRenderer.once('get', (arg) => {
+    setTableData(arg);
+  });
+  const getData = () => {
+    window.electron.ipcRenderer.sendMessage('get', [
+      `%${searchPrompt}%`,
+      1,
+      10,
+    ]);
+  };
+  useEffect(() => {
+    window.electron.ipcRenderer.sendMessage('get', [
+      `%${searchPrompt}%`,
+      1,
+      10,
+    ]);
+  }, [searchPrompt]);
   return (
-    <Button as={Link} to="/browser/add">
-      Thêm từ mới
-    </Button>
+    <>
+      <Button floated="right" icon primary as={Link} to="/browser/add">
+        Thêm từ mới
+      </Button>
+      <Input
+        floated="left"
+        icon="search"
+        placeholder="Search"
+        onChange={(event, data) => {
+          setSearchPrompt(data.value);
+        }}
+      />
+      <Table color="blue" celled>
+        <Table.Header fullWidth>
+          <Table.Row>
+            <Table.HeaderCell width={1} />
+            <Table.HeaderCell width={4}>Word</Table.HeaderCell>
+            <Table.HeaderCell width={2}>Type</Table.HeaderCell>
+            <Table.HeaderCell width={8}>Mean</Table.HeaderCell>
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
+          {tableData.map((data: any) => (
+            <Table.Row key={data.id}>
+              <Table.Cell collapsing>
+                <Button
+                  onClick={() => {
+                    try {
+                      window.electron.ipcRenderer.sendMessage('delete', [
+                        data.id,
+                      ]);
+                    } finally {
+                      getData();
+                    }
+                  }}
+                >
+                  Delete
+                </Button>
+              </Table.Cell>
+              <Table.Cell>{data.word}</Table.Cell>
+              <Table.Cell>{data.type}</Table.Cell>
+              <Table.Cell>{data.mean}</Table.Cell>
+            </Table.Row>
+          ))}
+        </Table.Body>
+      </Table>
+      <Divider hidden />
+      <Card.Group stackable itemsPerRow={3}>
+        {tableData.map((data: any) => (
+          <Card
+            centered
+            itemsPerRow={1}
+            onClick={() => {
+              console.log(data.id);
+            }}
+            key={data.id}
+          >
+            <Card.Content>
+              <Card.Header>{data.word}</Card.Header>
+              <Card.Description>
+                <Label color="red" horizontal>
+                  {data.type}
+                </Label>
+                {data.mean}
+              </Card.Description>
+            </Card.Content>
+            <Button
+              onClick={() => {
+                try {
+                  window.electron.ipcRenderer.sendMessage('delete', [data.id]);
+                } finally {
+                  getData();
+                }
+              }}
+            >
+              Delete
+            </Button>
+          </Card>
+        ))}
+      </Card.Group>
+    </>
   );
 }

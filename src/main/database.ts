@@ -30,3 +30,28 @@ export function insertWord(flashCard: IFlashCard) {
     example_vi: '',
   });
 }
+
+export function filterWord(filter: string, page: number, pageSize: number) {
+  const filterPrompt = fs
+    .readFileSync(path.join(sql, 'filterPagination.sql'))
+    .toString()
+    .trim();
+
+  const data = db.prepare(filterPrompt).all({
+    filter,
+    page,
+    pageSize,
+  });
+  return data;
+}
+
+export function deleteWord(id: number) {
+  const filterPrompt = fs
+    .readFileSync(path.join(sql, 'delete.sql'))
+    .toString()
+    .trim();
+
+  db.prepare(filterPrompt).run({
+    id,
+  });
+}
