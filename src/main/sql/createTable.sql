@@ -7,5 +7,6 @@ CREATE TABLE words  (
     "image" TEXT,
     "audio" TEXT,
     "example_en" TEXT,
-    "example_vi" TEXT
+    "example_vi" TEXT,
+    "deadline" TEXT
 )

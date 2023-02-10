@@ -1,12 +1,12 @@
 import { ipcMain } from 'electron';
 import IFlashCard from 'interfaces/FlashCard';
-import { deleteWord, filterWord, insertWord } from './database';
-
-// ipcMain.on('ipc-example', async (event, arg) => {
-//   const msgTemplate = (pingPong: string) => `IPC test: ${pingPong}`;
-//   console.log(msgTemplate(arg));
-//   event.reply('ipc-example', msgTemplate('pong'));
-// });
+import {
+  addDeadline,
+  deleteWord,
+  filterWord,
+  getReview,
+  insertWord,
+} from './database';
 
 ipcMain.on('insert', (event, arg) => {
   const flashCard: IFlashCard = arg[0];
@@ -22,4 +22,14 @@ ipcMain.on('get', (event, arg) => {
 ipcMain.on('delete', (event, arg) => {
   const [id] = arg;
   deleteWord(id);
+});
+
+ipcMain.on('get-review', (event) => {
+  const data = getReview();
+  event.reply('get-review', data);
+});
+
+ipcMain.on('add-deadline', (event, arg) => {
+  const [id, day] = arg;
+  addDeadline(id, day);
 });

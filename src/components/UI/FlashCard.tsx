@@ -1,17 +1,12 @@
 import IFlashCard from 'interfaces/FlashCard';
 import { Container, Header } from 'semantic-ui-react';
 
-export default function FlashCard({
-  vocabWord,
-  wordType,
-  wordDefinition,
-  imageLink,
-}: IFlashCard) {
+export default function FlashCard({ word, type, mean, image }: IFlashCard) {
   return (
     <div
       style={{
         position: 'relative',
-        backgroundImage: `url(${imageLink})`,
+        backgroundImage: `url(${image})`,
         backgroundSize: `auto`,
         color: `white`,
         paddingBottom: `53%`,
@@ -50,10 +45,10 @@ export default function FlashCard({
           }}
         >
           <Header as="h1" color="yellow">
-            {vocabWord}
+            {word}
           </Header>
-          <h5>{wordType}</h5>
-          {wordDefinition && (
+          <h5>{type}</h5>
+          {mean && (
             <p
               style={{
                 backgroundColor: 'black',
@@ -63,7 +58,7 @@ export default function FlashCard({
                 fontSize: '16px',
               }}
             >
-              {wordDefinition}
+              {mean}
             </p>
           )}
         </Container>

@@ -5,10 +5,10 @@ function Explore() {
   return (
     <Segment>
       <FlashCard
-        vocabWord="Hello World"
-        wordType="(code)"
-        wordDefinition="a sample program designed to familiarize users with most programming languages"
-        imageLink="https://code.org/images/social-media/helloworld-og-image-1200x630.png"
+        word="Hello World"
+        type="(code)"
+        mean="a sample program designed to familiarize users with most programming languages"
+        image="https://code.org/images/social-media/helloworld-og-image-1200x630.png"
       />
       <div
         style={{

@@ -1,6 +1,7 @@
 export default interface IFlashCard {
-  vocabWord: string;
-  wordType: string;
-  wordDefinition: string;
-  imageLink?: string;
+  id?: number;
+  word?: string;
+  type?: string;
+  mean?: string;
+  image?: string;
 }

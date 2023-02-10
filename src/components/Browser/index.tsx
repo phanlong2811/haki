@@ -1,14 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  Button,
-  Card,
-  Divider,
-  Grid,
-  Input,
-  Label,
-  Table,
-} from 'semantic-ui-react';
+import { Button, Card, Divider, Input, Label, Table } from 'semantic-ui-react';
 
 export default function Browser() {
   const [tableData, setTableData] = useState([]);
@@ -49,7 +41,8 @@ export default function Browser() {
             <Table.HeaderCell width={1} />
             <Table.HeaderCell width={4}>Word</Table.HeaderCell>
             <Table.HeaderCell width={2}>Type</Table.HeaderCell>
-            <Table.HeaderCell width={8}>Mean</Table.HeaderCell>
+            <Table.HeaderCell width={6}>Mean</Table.HeaderCell>
+            <Table.HeaderCell width={4}>Deadline</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
@@ -73,6 +66,7 @@ export default function Browser() {
               <Table.Cell>{data.word}</Table.Cell>
               <Table.Cell>{data.type}</Table.Cell>
               <Table.Cell>{data.mean}</Table.Cell>
+              <Table.Cell>{data.deadline}</Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>

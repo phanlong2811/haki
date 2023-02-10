@@ -6,11 +6,10 @@ import { Link } from 'react-router-dom';
 
 export default function NewWord() {
   const [flashCard, setFlashCard] = useState<IFlashCard>({
-    vocabWord: 'Hello World',
-    wordType: '(code)',
-    wordDefinition:
-      'a sample program designed to familiarize users with most programming languages',
-    imageLink:
+    word: 'Hello World',
+    type: '(code)',
+    mean: 'a sample program designed to familiarize users with most programming languages',
+    image:
       'https://code.org/images/social-media/helloworld-og-image-1200x630.png',
   });
   const addWord = async () => {
@@ -26,11 +25,11 @@ export default function NewWord() {
               <label>Word</label>
               <Input
                 placeholder="Word"
-                value={flashCard.vocabWord}
+                value={flashCard.word}
                 onChange={(e, data) => {
                   setFlashCard({
                     ...flashCard,
-                    vocabWord: data.value,
+                    word: data.value,
                   });
                 }}
               />
@@ -39,11 +38,11 @@ export default function NewWord() {
               <label>Word Type</label>
               <Input
                 placeholder="Word type"
-                value={flashCard.wordType}
+                value={flashCard.type}
                 onChange={(e, data) => {
                   setFlashCard({
                     ...flashCard,
-                    wordType: data.value,
+                    type: data.value,
                   });
                 }}
               />
@@ -52,11 +51,11 @@ export default function NewWord() {
               <label>Meaning</label>
               <Input
                 placeholder="Meaning"
-                value={flashCard.wordDefinition}
+                value={flashCard.mean}
                 onChange={(e, data) => {
                   setFlashCard({
                     ...flashCard,
-                    wordDefinition: data.value,
+                    mean: data.value,
                   });
                 }}
               />
@@ -65,11 +64,11 @@ export default function NewWord() {
               <label>Image Link</label>
               <Input
                 placeholder="Image Link"
-                value={flashCard.imageLink}
+                value={flashCard.image}
                 onChange={(e, data) => {
                   setFlashCard({
                     ...flashCard,
-                    imageLink: data.value,
+                    image: data.value,
                   });
                 }}
               />
@@ -89,10 +88,10 @@ export default function NewWord() {
         <Grid.Column>
           <h2 style={{ color: 'black' }}>Preview</h2>
           <FlashCard
-            vocabWord={flashCard.vocabWord}
-            wordType={flashCard.wordType}
-            wordDefinition={flashCard.wordDefinition}
-            imageLink={flashCard.imageLink}
+            word={flashCard.word}
+            type={flashCard.type}
+            mean={flashCard.mean}
+            image={flashCard.image}
           />
         </Grid.Column>
       </Grid>

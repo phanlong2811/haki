@@ -8,7 +8,7 @@ const db = require('better-sqlite3')('database/test.db');
 
 export function createTable() {
   const create = fs
-    .readFileSync(path.join(sql, 'create.sql'))
+    .readFileSync(path.join(sql, 'createTable.sql'))
     .toString()
     .trim();
   db.exec(create);
@@ -20,11 +20,11 @@ export function insertWord(flashCard: IFlashCard) {
     .trim();
 
   db.prepare(insert).run({
-    word: flashCard.vocabWord,
-    type: flashCard.wordType,
+    word: flashCard.word,
+    type: flashCard.type,
     phonetic: '',
-    mean: flashCard.wordDefinition,
-    image: flashCard.imageLink,
+    mean: flashCard.mean,
+    image: flashCard.image,
     audio: '',
     example_en: '',
     example_vi: '',
@@ -54,4 +54,33 @@ export function deleteWord(id: number) {
   db.prepare(filterPrompt).run({
     id,
   });
+}
+
+export function upsert(id: number) {
+  const filterPrompt = fs
+    .readFileSync(path.join(sql, 'delete.sql'))
+    .toString()
+    .trim();
+
+  db.prepare(filterPrompt).run({
+    id,
+  });
+}
+
+export function getReview() {
+  const getReviewPrompt = fs
+    .readFileSync(path.join(sql, 'getReview.sql'))
+    .toString()
+    .trim();
+  const data = db.prepare(getReviewPrompt).all();
+  return data;
+}
+
+export function addDeadline(id: number, day: string) {
+  const addDeadlinePrompt = fs
+    .readFileSync(path.join(sql, 'addDeadline.sql'))
+    .toString()
+    .trim();
+
+  db.prepare(addDeadlinePrompt).run({ id, day });
 }
