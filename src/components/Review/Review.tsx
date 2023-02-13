@@ -3,6 +3,7 @@ import IFlashCard from 'interfaces/FlashCard';
 import { useState } from 'react';
 import { Button, Icon, Message, Segment } from 'semantic-ui-react';
 
+const LATER_CONSTANT = [0, 1, 2, 7, 14, 30];
 function Review() {
   const [flashCard, setFlashCard] = useState<IFlashCard>([]);
   window.electron.ipcRenderer.sendMessage('get-review', []);
@@ -11,7 +12,11 @@ function Review() {
       if (flashCard.id) {
         window.electron.ipcRenderer.sendMessage('add-deadline', [
           flashCard.id,
-          '1',
+          LATER_CONSTANT[flashCard.later],
+        ]);
+        window.electron.ipcRenderer.sendMessage('update-later', [
+          flashCard.id,
+          (flashCard.later + 1) % 6,
         ]);
       }
     } finally {

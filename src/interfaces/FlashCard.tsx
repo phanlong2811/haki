@@ -4,4 +4,5 @@ export default interface IFlashCard {
   type?: string;
   mean?: string;
   image?: string;
+  later?: number;
 }

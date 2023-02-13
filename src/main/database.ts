@@ -7,15 +7,108 @@ const sql = path.join(__dirname, './sql');
 const db = require('better-sqlite3')('database/test.db');
 
 export function createTable() {
-  const create = fs
-    .readFileSync(path.join(sql, 'createTable.sql'))
+  const createWords = fs
+    .readFileSync(path.join(sql, 'words/createTable.sql'))
     .toString()
     .trim();
-  db.exec(create);
+  const createExplore = fs
+    .readFileSync(path.join(sql, 'explore/createTable.sql'))
+    .toString()
+    .trim();
+  db.exec(createExplore);
+  db.exec(createWords);
 }
-export function insertWord(flashCard: IFlashCard) {
+// function for table "words"
+export function insertWordToWords(flashCard: IFlashCard, later: number) {
   const insert = fs
-    .readFileSync(path.join(sql, 'insert.sql'))
+    .readFileSync(path.join(sql, 'words/insert.sql'))
+    .toString()
+    .trim();
+
+  db.prepare(insert).run({
+    word: flashCard.word,
+    type: flashCard.type,
+    phonetic: '',
+    mean: flashCard.mean,
+    image: flashCard.image,
+    audio: '',
+    example_en: '',
+    example_vi: '',
+    later,
+  });
+}
+
+export function filterWordFromWords(
+  filter: string,
+  page: number,
+  pageSize: number
+) {
+  const filterPrompt = fs
+    .readFileSync(path.join(sql, 'words/filterPagination.sql'))
+    .toString()
+    .trim();
+
+  const data = db.prepare(filterPrompt).all({
+    filter,
+    page,
+    pageSize,
+  });
+  return data;
+}
+
+export function deleteWordFromWords(id: number) {
+  const filterPrompt = fs
+    .readFileSync(path.join(sql, 'words/delete.sql'))
+    .toString()
+    .trim();
+
+  db.prepare(filterPrompt).run({
+    id,
+  });
+}
+
+export function upsertWordFromWords(id: number) {
+  const filterPrompt = fs
+    .readFileSync(path.join(sql, 'words/delete.sql'))
+    .toString()
+    .trim();
+
+  db.prepare(filterPrompt).run({
+    id,
+  });
+}
+
+export function getReviewFromWords() {
+  const getReviewPrompt = fs
+    .readFileSync(path.join(sql, 'words/getReview.sql'))
+    .toString()
+    .trim();
+  const data = db.prepare(getReviewPrompt).all();
+  return data;
+}
+
+export function addDeadlineToWords(id: number, day: string) {
+  const addDeadlinePrompt = fs
+    .readFileSync(path.join(sql, 'words/addDeadline.sql'))
+    .toString()
+    .trim();
+
+  db.prepare(addDeadlinePrompt).run({ id, day });
+}
+export function updateLater(id: number, later: number) {
+  const updateLaterFromWords = fs
+    .readFileSync(path.join(sql, 'words/updateLater.sql'))
+    .toString()
+    .trim();
+
+  db.prepare(updateLaterFromWords).run({ id, later });
+}
+updateLater(1, 1);
+
+// function for table "explore"
+export function insertWordToExplore(flashCard: IFlashCard) {
+  const insert = fs
+    .readFileSync(path.join(sql, 'explore/insert.sql'))
     .toString()
     .trim();
 
@@ -31,56 +124,22 @@ export function insertWord(flashCard: IFlashCard) {
   });
 }
 
-export function filterWord(filter: string, page: number, pageSize: number) {
-  const filterPrompt = fs
-    .readFileSync(path.join(sql, 'filterPagination.sql'))
+export function getWordFromExplore() {
+  const getExplore = fs
+    .readFileSync(path.join(sql, 'explore/getExplore.sql'))
     .toString()
     .trim();
-
-  const data = db.prepare(filterPrompt).all({
-    filter,
-    page,
-    pageSize,
-  });
+  const data = db.prepare(getExplore).all();
   return data;
 }
 
-export function deleteWord(id: number) {
+export function deleteWordFromExplore(id: number) {
   const filterPrompt = fs
-    .readFileSync(path.join(sql, 'delete.sql'))
+    .readFileSync(path.join(sql, 'explore/delete.sql'))
     .toString()
     .trim();
 
   db.prepare(filterPrompt).run({
     id,
   });
-}
-
-export function upsert(id: number) {
-  const filterPrompt = fs
-    .readFileSync(path.join(sql, 'delete.sql'))
-    .toString()
-    .trim();
-
-  db.prepare(filterPrompt).run({
-    id,
-  });
-}
-
-export function getReview() {
-  const getReviewPrompt = fs
-    .readFileSync(path.join(sql, 'getReview.sql'))
-    .toString()
-    .trim();
-  const data = db.prepare(getReviewPrompt).all();
-  return data;
-}
-
-export function addDeadline(id: number, day: string) {
-  const addDeadlinePrompt = fs
-    .readFileSync(path.join(sql, 'addDeadline.sql'))
-    .toString()
-    .trim();
-
-  db.prepare(addDeadlinePrompt).run({ id, day });
 }

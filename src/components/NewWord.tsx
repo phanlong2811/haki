@@ -12,8 +12,8 @@ export default function NewWord() {
     image:
       'https://code.org/images/social-media/helloworld-og-image-1200x630.png',
   });
-  const addWord = async () => {
-    window.electron.ipcRenderer.sendMessage('insert', [flashCard]);
+  const addWord = () => {
+    window.electron.ipcRenderer.sendMessage('insert', [flashCard, 1]);
   };
   return (
     <>

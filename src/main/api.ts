@@ -1,35 +1,61 @@
 import { ipcMain } from 'electron';
 import IFlashCard from 'interfaces/FlashCard';
 import {
-  addDeadline,
-  deleteWord,
-  filterWord,
-  getReview,
-  insertWord,
+  addDeadlineToWords,
+  deleteWordFromWords,
+  filterWordFromWords,
+  getReviewFromWords,
+  insertWordToWords,
+  insertWordToExplore,
+  getWordFromExplore,
+  deleteWordFromExplore,
+  updateLater,
 } from './database';
 
+// review tab
 ipcMain.on('insert', (event, arg) => {
   const flashCard: IFlashCard = arg[0];
-  insertWord(flashCard);
+  const later: number = arg[1];
+  insertWordToWords(flashCard, later);
 });
 
 ipcMain.on('get', (event, arg) => {
   const [filterPrompt, page, pageSize] = arg;
-  const data = filterWord(filterPrompt, page, pageSize);
+  const data = filterWordFromWords(filterPrompt, page, pageSize);
   event.reply('get', data);
 });
 
 ipcMain.on('delete', (event, arg) => {
   const [id] = arg;
-  deleteWord(id);
+  deleteWordFromWords(id);
 });
 
 ipcMain.on('get-review', (event) => {
-  const data = getReview();
+  const data = getReviewFromWords();
   event.reply('get-review', data);
 });
 
 ipcMain.on('add-deadline', (event, arg) => {
   const [id, day] = arg;
-  addDeadline(id, day);
+  addDeadlineToWords(id, day);
+});
+ipcMain.on('update-later', (event, arg) => {
+  const [id, day] = arg;
+  updateLater(id, day);
+});
+
+// explore tab
+ipcMain.on('insert-explore', (event, arg) => {
+  const flashCard: IFlashCard = arg[0];
+  insertWordToExplore(flashCard);
+});
+
+ipcMain.on('get-explore', (event) => {
+  const data = getWordFromExplore();
+  event.reply('get-explore', data);
+});
+
+ipcMain.on('delete-explore', (event, arg) => {
+  const [id] = arg;
+  deleteWordFromExplore(id);
 });

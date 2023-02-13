@@ -1,0 +1,1 @@
+SELECT * FROM explore LIMIT 1;
