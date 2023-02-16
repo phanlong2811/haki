@@ -8,5 +8,6 @@ CREATE TABLE words  (
     "audio" TEXT,
     "example_en" TEXT,
     "example_vi" TEXT,
-    "deadline" TEXT
+    "deadline" TEXT,
+    "later" NUMBER
 )

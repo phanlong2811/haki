@@ -7,5 +7,4 @@ CREATE TABLE explore (
     "image" TEXT,
     "audio" TEXT,
     "example_en" TEXT,
-    "later": INTEGER,
 )

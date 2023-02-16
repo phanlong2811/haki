@@ -1,11 +1,13 @@
 import FlashCard from 'components/UI/FlashCard';
 import IFlashCard from 'interfaces/FlashCard';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, Icon, Message, Segment } from 'semantic-ui-react';
 
 function Explore() {
   const [flashCard, setFlashCard] = useState<IFlashCard>([]);
-  window.electron.ipcRenderer.sendMessage('get-explore', []);
+  useEffect(() => {
+    window.electron.ipcRenderer.sendMessage('get-explore', []);
+  }, []);
   window.electron.ipcRenderer.once('get-explore', (arg) => {
     if (arg.length) {
       setFlashCard(arg[0]);

@@ -17,7 +17,7 @@ export default function NewWord() {
   };
   return (
     <>
-      <Grid columns={2} relaxed="very" stackable>
+      <Grid columns={2} stackable>
         <Grid.Column>
           <h2 style={{ color: 'black' }}>Information</h2>
           <Form>

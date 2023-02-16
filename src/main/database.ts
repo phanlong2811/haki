@@ -87,6 +87,16 @@ export function getReviewFromWords() {
   return data;
 }
 
+export function getReviewMultipleChoice(prompt: string) {
+  const getReviewPrompt = fs
+    .readFileSync(path.join(sql, 'words/selectMultiple.sql'))
+    .toString()
+    .trim();
+  const data = db.prepare(getReviewPrompt).all({ prompt });
+  return data;
+}
+console.log(getReviewMultipleChoice('Huan'));
+
 export function addDeadlineToWords(id: number, day: string) {
   const addDeadlinePrompt = fs
     .readFileSync(path.join(sql, 'words/addDeadline.sql'))

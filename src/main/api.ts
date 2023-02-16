@@ -10,6 +10,7 @@ import {
   getWordFromExplore,
   deleteWordFromExplore,
   updateLater,
+  getReviewMultipleChoice,
 } from './database';
 
 // review tab
@@ -42,6 +43,12 @@ ipcMain.on('add-deadline', (event, arg) => {
 ipcMain.on('update-later', (event, arg) => {
   const [id, day] = arg;
   updateLater(id, day);
+});
+
+ipcMain.on('get-multiple', (event, arg) => {
+  const [prompt] = arg;
+  const data = getReviewMultipleChoice(prompt);
+  event.reply('get-multiple', data);
 });
 
 // explore tab
