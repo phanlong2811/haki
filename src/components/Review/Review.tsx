@@ -35,8 +35,8 @@ function Review() {
   });
   return (
     <Segment>
-      <MultipleChoice flashCard={flashCard} />
-      {/* {flashCard.word && (
+      {/* <MultipleChoice flashCard={flashCard} /> */}
+      {flashCard.word && (
         <>
           <FlashCard
             word={flashCard.word}
@@ -73,7 +73,7 @@ function Review() {
           <Message.Header>Completed!</Message.Header>
           <p>Now you can explore new word!</p>
         </Message>
-      )} */}
+      )}
     </Segment>
   );
 }

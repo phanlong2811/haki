@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Button,
@@ -15,6 +15,7 @@ import {
 
 function DashBoard() {
   const [percent, setPercent] = useState<number>(80);
+
   return (
     <>
       <Segment>
@@ -88,11 +89,18 @@ function DashBoard() {
 }
 
 export default function Home() {
+  useEffect(() => {
+    window.electron.ipcRenderer.sendMessage('get-size-words', []);
+  }, []);
+  const [sizeWords, setSizeWords] = useState(0);
+  window.electron.ipcRenderer.once('get-size-words', (arg) => {
+    setSizeWords(arg[0]['COUNT(*)']);
+  });
   return (
     <>
       <Grid columns={1} textAlign="center">
         <Grid.Column>
-          <Statistic label="words" value="2811" />
+          <Statistic label="words" value={sizeWords} />
         </Grid.Column>
       </Grid>
       <Divider hidden />

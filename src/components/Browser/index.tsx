@@ -1,6 +1,14 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Card, Divider, Input, Label, Table } from 'semantic-ui-react';
+import {
+  Button,
+  Card,
+  Divider,
+  Grid,
+  Input,
+  Label,
+  Table,
+} from 'semantic-ui-react';
 
 export default function Browser() {
   const [tableData, setTableData] = useState([]);
@@ -49,18 +57,8 @@ export default function Browser() {
           {tableData.map((data: any) => (
             <Table.Row key={data.id}>
               <Table.Cell collapsing>
-                <Button
-                  onClick={() => {
-                    try {
-                      window.electron.ipcRenderer.sendMessage('delete', [
-                        data.id,
-                      ]);
-                    } finally {
-                      getData();
-                    }
-                  }}
-                >
-                  Delete
+                <Button color="teal" as={Link} to={`/browser/edit/${data.id}`}>
+                  Edit
                 </Button>
               </Table.Cell>
               <Table.Cell>{data.word}</Table.Cell>
@@ -74,15 +72,8 @@ export default function Browser() {
       <Divider hidden />
       <Card.Group stackable itemsPerRow={3}>
         {tableData.map((data: any) => (
-          <Card
-            centered
-            itemsPerRow={1}
-            onClick={() => {
-              console.log(data.id);
-            }}
-            key={data.id}
-          >
-            <Card.Content>
+          <Card centered itemsPerRow={1} primary key={data.id}>
+            <Card.Content as={Link} to={`/browser/detail/${data.id}`}>
               <Card.Header>{data.word}</Card.Header>
               <Card.Description>
                 <Label color="red" horizontal>
@@ -91,17 +82,39 @@ export default function Browser() {
                 {data.mean}
               </Card.Description>
             </Card.Content>
-            <Button
-              onClick={() => {
-                try {
-                  window.electron.ipcRenderer.sendMessage('delete', [data.id]);
-                } finally {
-                  getData();
-                }
-              }}
-            >
-              Delete
-            </Button>
+            <Card.Content extra>
+              <Grid columns={2} stackable>
+                <Grid.Column>
+                  <div className="ui two buttons">
+                    <Button
+                      onClick={() => {
+                        try {
+                          window.electron.ipcRenderer.sendMessage('delete', [
+                            data.id,
+                          ]);
+                        } finally {
+                          getData();
+                        }
+                      }}
+                    >
+                      Delete
+                    </Button>
+                  </div>
+                </Grid.Column>
+                <Grid.Column>
+                  <div className="ui two buttons">
+                    <Button
+                      inverted
+                      color="blue"
+                      as={Link}
+                      to={`/browser/edit/${data.id}`}
+                    >
+                      Edit
+                    </Button>
+                  </div>
+                </Grid.Column>
+              </Grid>
+            </Card.Content>
           </Card>
         ))}
       </Card.Group>

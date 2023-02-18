@@ -2,13 +2,15 @@ import './App.css';
 import MenuBar from 'components/MenuBar';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import Home from 'components/Home';
-import { Button, Container, Divider } from 'semantic-ui-react';
+import { Container, Divider } from 'semantic-ui-react';
 import Review from 'components/Review';
 import Explore from 'components/Explore';
 import React, { useState } from 'react';
 import SearchWord from 'components/SearchWord';
 import Browser from 'components/Browser';
 import NewWord from 'components/NewWord';
+import EditPage from 'components/EditPage';
+import Detail from 'components/Detail';
 
 export default function App() {
   const [activeItem, setActiveItem] = useState('learn');
@@ -45,6 +47,8 @@ export default function App() {
           <Route path="browser">
             <Route index element={<Browser />} />
             <Route path="add" element={<NewWord />} />
+            <Route path="edit/:id" element={<EditPage />} />
+            <Route path="detail/:id" element={<Detail />} />
           </Route>
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

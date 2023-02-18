@@ -95,7 +95,6 @@ export function getReviewMultipleChoice(prompt: string) {
   const data = db.prepare(getReviewPrompt).all({ prompt });
   return data;
 }
-console.log(getReviewMultipleChoice('Huan'));
 
 export function addDeadlineToWords(id: number, day: string) {
   const addDeadlinePrompt = fs
@@ -113,7 +112,39 @@ export function updateLater(id: number, later: number) {
 
   db.prepare(updateLaterFromWords).run({ id, later });
 }
-updateLater(1, 1);
+export function selectBasedIdFromWords(id: number) {
+  const getPrompt = fs
+    .readFileSync(path.join(sql, 'words/selectBasedId.sql'))
+    .toString()
+    .trim();
+
+  const data = db.prepare(getPrompt).all({
+    id,
+  });
+  return data;
+}
+export function updateWordFromWords(
+  id: number,
+  word: string,
+  type: string,
+  mean: string,
+  image: string
+) {
+  const prompt = fs
+    .readFileSync(path.join(sql, 'words/update.sql'))
+    .toString()
+    .trim();
+
+  db.prepare(prompt).run({ id, word, type, mean, image });
+}
+export function getSizeWords() {
+  const prompt = fs
+    .readFileSync(path.join(sql, 'words/getSizeWords.sql'))
+    .toString()
+    .trim();
+  const data = db.prepare(prompt).all();
+  return data;
+}
 
 // function for table "explore"
 export function insertWordToExplore(flashCard: IFlashCard) {

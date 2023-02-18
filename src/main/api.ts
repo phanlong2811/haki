@@ -11,6 +11,9 @@ import {
   deleteWordFromExplore,
   updateLater,
   getReviewMultipleChoice,
+  selectBasedIdFromWords,
+  updateWordFromWords,
+  getSizeWords,
 } from './database';
 
 // review tab
@@ -49,6 +52,25 @@ ipcMain.on('get-multiple', (event, arg) => {
   const [prompt] = arg;
   const data = getReviewMultipleChoice(prompt);
   event.reply('get-multiple', data);
+});
+ipcMain.on('get-based-id', (event, arg) => {
+  const [id] = arg;
+  const data = selectBasedIdFromWords(id);
+  event.reply('get-based-id', data);
+});
+ipcMain.on('update-word', (event, arg) => {
+  const flashCard: IFlashCard = arg[0];
+  updateWordFromWords(
+    flashCard.id,
+    flashCard.word,
+    flashCard.type,
+    flashCard.mean,
+    flashCard.image
+  );
+});
+ipcMain.on('get-size-words', (event) => {
+  const result = getSizeWords();
+  event.reply('get-size-words', result);
 });
 
 // explore tab
