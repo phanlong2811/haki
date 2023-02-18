@@ -5,7 +5,6 @@ import {
   Progress,
   Segment,
   Card,
-  Image,
   Divider,
   Icon,
   Header,
@@ -118,7 +117,7 @@ function DashBoard() {
         <div style={{ padding: '10px' }}>
           <CalendarHeatmap
             gutterSize={3}
-            startDate={new Date().setFullYear(new Date().getFullYear() - 1)}
+            startDate={new Date().setDate(new Date().getDate() - 364)}
             endDate={new Date()}
             values={progressTable}
             classForValue={(value) => {
@@ -128,11 +127,6 @@ function DashBoard() {
               return `color-scale-${
                 Math.min(Math.round(value.num_learn / 25), 3) + 1
               }`;
-            }}
-            tooltipDataAttrs={(value) => {
-              return {
-                'data-tip': `${value.num_learn}`,
-              };
             }}
           />
         </div>
