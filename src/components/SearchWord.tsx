@@ -13,12 +13,18 @@ import { Link } from 'react-router-dom';
 
 function InputCustom({ setSearchWord }) {
   const [inputValue, setInputValue] = useState('');
+  const [tableData, setTableData] = useState([]);
   const inputRef = useRef();
   useEffect(() => {
     inputRef.current.focus();
     inputRef.current.setSelectionRange(0, inputRef.current.value.length);
   }, []);
-
+  window.electron.ipcRenderer.once('get', (arg) => {
+    setTableData(arg);
+  });
+  useEffect(() => {
+    window.electron.ipcRenderer.sendMessage('get', [`%${inputValue}%`, 1, 10]);
+  }, [inputValue]);
   return (
     <>
       <div
@@ -43,72 +49,25 @@ function InputCustom({ setSearchWord }) {
             style={{ padding: '11px', maxHeight: 200, overflow: 'auto' }}
           >
             <Card.Group centered stackable itemsPerRow={1}>
-              <Card
-                centered
-                itemsPerRow={1}
-                onClick={() => {
-                  console.log(1);
-                }}
-              >
-                <Card.Content>
-                  <Card.Header>Hello World</Card.Header>
-                  <Card.Description>
-                    <Label color="red" horizontal>
-                      adv
-                    </Label>
-                    a sample program designed to familiarize users with most
-                    programming languages
-                  </Card.Description>
-                </Card.Content>
-              </Card>
-              <Card
-                centered
-                itemsPerRow={1}
-                onClick={() => {
-                  console.log(1);
-                }}
-              >
-                <Card.Content>
-                  <Card.Header>Hello World</Card.Header>
-                  <Card.Meta>(code)</Card.Meta>
-                  <Card.Description>
-                    a sample program designed to familiarize users with most
-                    programming languages
-                  </Card.Description>
-                </Card.Content>
-              </Card>
-              <Card
-                centered
-                itemsPerRow={1}
-                onClick={() => {
-                  console.log(1);
-                }}
-              >
-                <Card.Content>
-                  <Card.Header>Hello World</Card.Header>
-                  <Card.Meta>(code)</Card.Meta>
-                  <Card.Description>
-                    a sample program designed to familiarize users with most
-                    programming languages
-                  </Card.Description>
-                </Card.Content>
-              </Card>
-              <Card
-                centered
-                itemsPerRow={1}
-                onClick={() => {
-                  console.log(1);
-                }}
-              >
-                <Card.Content>
-                  <Card.Header>Hello World</Card.Header>
-                  <Card.Meta>(code)</Card.Meta>
-                  <Card.Description>
-                    a sample program designed to familiarize users with most
-                    programming languages
-                  </Card.Description>
-                </Card.Content>
-              </Card>
+              {tableData.map((data: any) => (
+                <Card
+                  as={Link}
+                  to={`/browser/detail/${data.id}`}
+                  itemsPerRow={1}
+                  onClick={() => setSearchWord(false)}
+                  centered
+                >
+                  <Card.Content>
+                    <Card.Header>{data.word}</Card.Header>
+                    <Card.Description>
+                      <Label color="red" horizontal>
+                        {data.type}
+                      </Label>
+                      {data.mean}
+                    </Card.Description>
+                  </Card.Content>
+                </Card>
+              ))}
             </Card.Group>
           </Container>
         </>
@@ -124,7 +83,7 @@ function InputCustom({ setSearchWord }) {
                   content="Thêm từ mới"
                   primary
                   as={Link}
-                  to="/browser/add"
+                  to={`/browser/add?search=${inputValue}`}
                   onClick={() => setSearchWord(false)}
                 />
               </Grid.Column>

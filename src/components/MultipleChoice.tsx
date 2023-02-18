@@ -1,5 +1,5 @@
 import FlashCard from 'components/UI/FlashCard';
-import { Button, Card, Divider, Icon } from 'semantic-ui-react';
+import { Button, Card, Divider, Icon, Modal } from 'semantic-ui-react';
 import IMultipleChoice from 'interfaces/MultipleChoice';
 import { useState } from 'react';
 
@@ -11,17 +11,20 @@ export default function MultipleChoice({ flashCard }: IMultipleChoice) {
     setMultipleChoice([...arg, { word: flashCard.word, isAnswer: 1 }]);
   });
   const [isEnd, setIsEnd] = useState(false);
+  const [isCorrect, setIsCorrect] = useState(false);
   const getAnswer = (isAnswer: boolean) => {
     setIsEnd(true);
-    // window.electron.ipcRenderer.sendMessage('add-deadline', [
-    //     flashCard.id,
-    //     isAnswer ? LATER_CONSTANT[flashCard.later] : 0,
-    //   ]);
-    //   window.electron.ipcRenderer.sendMessage('update-later', [
-    //     flashCard.id,
-    //     isAnswer ? (flashCard.later + 1) % 6 : 1,
-    //   ]);
+    setIsCorrect(isAnswer);
+    window.electron.ipcRenderer.sendMessage('add-deadline', [
+      flashCard.id,
+      isAnswer ? LATER_CONSTANT[flashCard.later] : 0,
+    ]);
+    window.electron.ipcRenderer.sendMessage('update-later', [
+      flashCard.id,
+      isAnswer ? (flashCard.later + 1) % 6 : 1,
+    ]);
   };
+  const [open, setOpen] = useState(false);
   return (
     <>
       <FlashCard mean={flashCard.mean} image={flashCard.image} />
@@ -38,7 +41,10 @@ export default function MultipleChoice({ flashCard }: IMultipleChoice) {
                 <Card
                   style={{ padding: `30px`, textAlign: `center` }}
                   centered
-                  onClick={() => getAnswer(data.isAnswer)}
+                  onClick={() => {
+                    setOpen(true);
+                    getAnswer(data.isAnswer);
+                  }}
                 >
                   {data.word}
                 </Card>
@@ -73,16 +79,49 @@ export default function MultipleChoice({ flashCard }: IMultipleChoice) {
             animated
             primary
             onClick={() => {
-              console.log(1);
+              window.electron.ipcRenderer.sendMessage('get-review', []);
+              window.electron.ipcRenderer.sendMessage('update-learn', []);
+              setIsEnd(false);
             }}
           >
-            <Button.Content visible>Review next</Button.Content>
+            <Button.Content visible>
+              Review in {LATER_CONSTANT[flashCard.later]} day
+            </Button.Content>
             <Button.Content hidden>
               <Icon name="arrow right" />
             </Button.Content>
           </Button>
         </div>
       )}
+
+      <Modal
+        onClose={() => setOpen(false)}
+        onOpen={() => setOpen(true)}
+        open={open}
+      >
+        <Modal.Content>
+          <FlashCard
+            word={flashCard.word}
+            type={flashCard.type}
+            mean={flashCard.mean}
+            image={flashCard.image}
+          />
+        </Modal.Content>
+        <Modal.Actions>
+          <Button
+            content={`Review in ${LATER_CONSTANT[flashCard.later]} day`}
+            labelPosition="right"
+            icon="checkmark"
+            onClick={() => {
+              setOpen(false);
+              window.electron.ipcRenderer.sendMessage('get-review', []);
+              window.electron.ipcRenderer.sendMessage('update-learn', []);
+              setIsEnd(false);
+            }}
+            positive
+          />
+        </Modal.Actions>
+      </Modal>
     </>
   );
 }

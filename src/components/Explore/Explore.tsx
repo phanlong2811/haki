@@ -24,6 +24,7 @@ function Explore() {
       window.electron.ipcRenderer.sendMessage('delete-explore', [flashCard.id]);
     } finally {
       window.electron.ipcRenderer.sendMessage('get-explore', []);
+      window.electron.ipcRenderer.sendMessage('update-explore', []);
     }
   };
   return (

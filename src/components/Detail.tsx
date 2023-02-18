@@ -7,7 +7,7 @@ export default function Detail() {
   const params = useParams();
   useEffect(() => {
     window.electron.ipcRenderer.sendMessage('get-based-id', [params.id]);
-  }, []);
+  }, [params]);
   const [flashCard, setFlashCard] = useState<IFlashCard>([]);
   window.electron.ipcRenderer.once('get-based-id', (arg) => {
     if (arg.length) {

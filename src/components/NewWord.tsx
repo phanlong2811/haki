@@ -1,12 +1,14 @@
 import { Button, Form, Grid, Input, Message } from 'semantic-ui-react';
 import FlashCard from 'components/UI/FlashCard';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import IFlashCard from 'interfaces/FlashCard';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 
 export default function NewWord() {
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const [flashCard, setFlashCard] = useState<IFlashCard>({
-    word: 'Hello World',
+    word: '',
     type: '(code)',
     mean: 'a sample program designed to familiarize users with most programming languages',
     image:
@@ -15,6 +17,12 @@ export default function NewWord() {
   const addWord = () => {
     window.electron.ipcRenderer.sendMessage('insert', [flashCard, 1]);
   };
+  useEffect(() => {
+    setFlashCard({
+      ...flashCard,
+      word: searchParams.get('search') ? searchParams.get('search') : '',
+    });
+  }, [searchParams]);
   return (
     <>
       <Grid columns={2} stackable>

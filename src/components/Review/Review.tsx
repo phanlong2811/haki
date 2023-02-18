@@ -24,6 +24,7 @@ function Review() {
       }
     } finally {
       window.electron.ipcRenderer.sendMessage('get-review', []);
+      window.electron.ipcRenderer.sendMessage('update-learn', []);
     }
   };
   window.electron.ipcRenderer.once('get-review', (arg) => {
@@ -35,8 +36,8 @@ function Review() {
   });
   return (
     <Segment>
-      {/* <MultipleChoice flashCard={flashCard} /> */}
-      {flashCard.word && (
+      {flashCard.word && <MultipleChoice flashCard={flashCard} />}
+      {/* {flashCard.word && (
         <>
           <FlashCard
             word={flashCard.word}
@@ -68,6 +69,7 @@ function Review() {
           </div>
         </>
       )}
+      */}
       {!flashCard.word && (
         <Message positive>
           <Message.Header>Completed!</Message.Header>

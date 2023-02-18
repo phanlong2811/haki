@@ -184,3 +184,32 @@ export function deleteWordFromExplore(id: number) {
     id,
   });
 }
+
+// function for "progress"
+export function addCounterExplore() {
+  const prompt = fs
+    .readFileSync(path.join(sql, 'progress/updateExplore.sql'))
+    .toString()
+    .trim();
+
+  db.prepare(prompt).run();
+}
+
+export function addCounterLearn() {
+  const prompt = fs
+    .readFileSync(path.join(sql, 'progress/updateLearn.sql'))
+    .toString()
+    .trim();
+
+  db.prepare(prompt).run();
+}
+
+export function getProgressToday() {
+  const prompt = fs
+    .readFileSync(path.join(sql, 'progress/getToday.sql'))
+    .toString()
+    .trim();
+
+  const data = db.prepare(prompt).all();
+  return data;
+}

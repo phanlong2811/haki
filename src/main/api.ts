@@ -14,6 +14,9 @@ import {
   selectBasedIdFromWords,
   updateWordFromWords,
   getSizeWords,
+  addCounterExplore,
+  addCounterLearn,
+  getProgressToday,
 } from './database';
 
 // review tab
@@ -87,4 +90,16 @@ ipcMain.on('get-explore', (event) => {
 ipcMain.on('delete-explore', (event, arg) => {
   const [id] = arg;
   deleteWordFromExplore(id);
+});
+
+// progress
+ipcMain.on('update-explore', () => {
+  addCounterExplore();
+});
+ipcMain.on('update-learn', () => {
+  addCounterLearn();
+});
+ipcMain.on('get-today', (event) => {
+  const data = getProgressToday();
+  event.reply('get-today', data);
 });

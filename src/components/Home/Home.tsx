@@ -15,7 +15,15 @@ import {
 
 function DashBoard() {
   const [percent, setPercent] = useState<number>(80);
-
+  useEffect(() => {
+    window.electron.ipcRenderer.sendMessage('get-today', []);
+  });
+  const [numExplore, setNumExplore] = useState(0);
+  const [numLearn, setNumLearn] = useState(0);
+  window.electron.ipcRenderer.once('get-today', (arg) => {
+    setNumExplore(arg[0].num_explore);
+    setNumLearn(arg[0].num_learn);
+  });
   return (
     <>
       <Segment>
@@ -26,7 +34,7 @@ function DashBoard() {
           <Card>
             <Card.Content>
               <Card.Header>Ôn tập lại các từ vựng</Card.Header>
-              <Card.Meta>500 từ</Card.Meta>
+              <Card.Meta>{numLearn} từ đã học</Card.Meta>
               <Card.Description>
                 Ôn tập các từ giúp bạn nhớ lâu hơn
               </Card.Description>
@@ -42,7 +50,7 @@ function DashBoard() {
           <Card>
             <Card.Content>
               <Card.Header>Khám phá các từ mới</Card.Header>
-              <Card.Meta>100 từ</Card.Meta>
+              <Card.Meta>{numExplore} từ đã khám phá</Card.Meta>
               <Card.Description>
                 Khám phá các từ giúp bạn tích lũy thêm vốn từ vựng
               </Card.Description>
