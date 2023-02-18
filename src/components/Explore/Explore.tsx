@@ -63,7 +63,7 @@ function Explore() {
       )}
       {!flashCard.word && (
         <Message positive>
-          <Message.Header>Completed!</Message.Header>
+          <Message.Header>Chờ bộ thẻ được cập nhật nhé!</Message.Header>
         </Message>
       )}
     </>

@@ -1,8 +1,7 @@
 import MultipleChoice from 'components/MultipleChoice';
-import FlashCard from 'components/UI/FlashCard';
 import IFlashCard from 'interfaces/FlashCard';
 import { useEffect, useState } from 'react';
-import { Button, Icon, Message, Segment } from 'semantic-ui-react';
+import { Message, Segment } from 'semantic-ui-react';
 
 const LATER_CONSTANT = [0, 1, 2, 7, 14, 30];
 function Review() {
@@ -10,6 +9,7 @@ function Review() {
     window.electron.ipcRenderer.sendMessage('get-review', []);
   }, []);
   const [flashCard, setFlashCard] = useState<IFlashCard>([]);
+ 
   const getWord = async (isRemembered: boolean) => {
     try {
       if (flashCard.id) {
@@ -73,7 +73,7 @@ function Review() {
       {!flashCard.word && (
         <Message positive>
           <Message.Header>Completed!</Message.Header>
-          <p>Now you can explore new word!</p>
+          <p>Bạn đã làm tốt trong ngày hôm nay</p>
         </Message>
       )}
     </Segment>

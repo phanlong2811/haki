@@ -1,2 +1,1 @@
-SELECT COUNT(*) FROM words
-WHERE date(deadline) = date('now');
+SELECT COUNT(*) FROM words;

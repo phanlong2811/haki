@@ -17,6 +17,9 @@ import {
   addCounterExplore,
   addCounterLearn,
   getProgressToday,
+  needReview,
+  needExplore,
+  getProgressTable,
 } from './database';
 
 // review tab
@@ -75,6 +78,10 @@ ipcMain.on('get-size-words', (event) => {
   const result = getSizeWords();
   event.reply('get-size-words', result);
 });
+ipcMain.on('get-need-review', (event) => {
+  const result = needReview();
+  event.reply('get-need-review', result);
+});
 
 // explore tab
 ipcMain.on('insert-explore', (event, arg) => {
@@ -91,6 +98,10 @@ ipcMain.on('delete-explore', (event, arg) => {
   const [id] = arg;
   deleteWordFromExplore(id);
 });
+ipcMain.on('get-need-explore', (event) => {
+  const result = needExplore();
+  event.reply('get-need-explore', result);
+});
 
 // progress
 ipcMain.on('update-explore', () => {
@@ -102,4 +113,8 @@ ipcMain.on('update-learn', () => {
 ipcMain.on('get-today', (event) => {
   const data = getProgressToday();
   event.reply('get-today', data);
+});
+ipcMain.on('get-progress-table', (event) => {
+  const data = getProgressTable();
+  event.reply('get-progress-table', data);
 });

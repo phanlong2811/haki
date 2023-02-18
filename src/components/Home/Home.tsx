@@ -12,29 +12,57 @@ import {
   Grid,
   Statistic,
 } from 'semantic-ui-react';
+import CalendarHeatmap from 'react-calendar-heatmap';
 
 function DashBoard() {
-  const [percent, setPercent] = useState<number>(80);
   useEffect(() => {
     window.electron.ipcRenderer.sendMessage('get-today', []);
+    window.electron.ipcRenderer.sendMessage('get-need-review', []);
+    window.electron.ipcRenderer.sendMessage('get-need-explore', []);
+    window.electron.ipcRenderer.sendMessage('get-progress-table', []);
   });
+
   const [numExplore, setNumExplore] = useState(0);
   const [numLearn, setNumLearn] = useState(0);
+  const [numNeedLearn, setNumNeedLearn] = useState(0);
+  const [numNeedExplore, setNumNeedExplore] = useState(0);
+  const [percent, setPercent] = useState<number>(0);
+  const [progressTable, setProgressTable] = useState([]);
+  useEffect(() => {
+    setPercent(Math.round((numLearn / (numNeedLearn + numLearn)) * 100));
+  }, [numExplore, numLearn, numNeedLearn, numNeedExplore]);
   window.electron.ipcRenderer.once('get-today', (arg) => {
     setNumExplore(arg[0].num_explore);
     setNumLearn(arg[0].num_learn);
   });
+  window.electron.ipcRenderer.once('get-need-review', (arg) => {
+    setNumNeedLearn(arg);
+  });
+  window.electron.ipcRenderer.once('get-progress-table', (arg) => {
+    setProgressTable(arg);
+  });
+  window.electron.ipcRenderer.once('get-need-explore', (arg) => {
+    setNumNeedExplore(arg);
+  });
+
   return (
     <>
       <Segment>
         <Header as="h2" content="Today's tasks" />
-        <Progress percent={percent} indicating progress />
+        <Progress
+          percent={percent}
+          indicating
+          progress
+          label="premature optimization is the root of all evil"
+        />
         <Divider hidden />
         <Card.Group centered itemsPerRow={3}>
           <Card>
             <Card.Content>
               <Card.Header>Ôn tập lại các từ vựng</Card.Header>
-              <Card.Meta>{numLearn} từ đã học</Card.Meta>
+              <Card.Meta>
+                {numLearn} từ đã học - {numNeedLearn} từ cần ôn tập
+              </Card.Meta>
               <Card.Description>
                 Ôn tập các từ giúp bạn nhớ lâu hơn
               </Card.Description>
@@ -50,7 +78,7 @@ function DashBoard() {
           <Card>
             <Card.Content>
               <Card.Header>Khám phá các từ mới</Card.Header>
-              <Card.Meta>{numExplore} từ đã khám phá</Card.Meta>
+              <Card.Meta>Đã mở {numExplore} thẻ trong hôm nay</Card.Meta>
               <Card.Description>
                 Khám phá các từ giúp bạn tích lũy thêm vốn từ vựng
               </Card.Description>
@@ -87,10 +115,27 @@ function DashBoard() {
       </Segment>
       <Segment>
         <Header as="h2" content="Heatmap" />
-        <Image
-          src="https://script.gs/content/images/2022/04/mhawksey-github-aug-2019.png"
-          centered
-        />
+        <div style={{ padding: '10px' }}>
+          <CalendarHeatmap
+            gutterSize={3}
+            startDate={new Date().setFullYear(new Date().getFullYear() - 1)}
+            endDate={new Date()}
+            values={progressTable}
+            classForValue={(value) => {
+              if (!value || !value.num_learn) {
+                return 'color-empty';
+              }
+              return `color-scale-${
+                Math.min(Math.round(value.num_learn / 25), 3) + 1
+              }`;
+            }}
+            tooltipDataAttrs={(value) => {
+              return {
+                'data-tip': `${value.num_learn}`,
+              };
+            }}
+          />
+        </div>
       </Segment>
     </>
   );
@@ -108,7 +153,7 @@ export default function Home() {
     <>
       <Grid columns={1} textAlign="center">
         <Grid.Column>
-          <Statistic label="words" value={sizeWords} />
+          <Statistic label="words in library" value={sizeWords} />
         </Grid.Column>
       </Grid>
       <Divider hidden />

@@ -11,12 +11,12 @@ import Browser from 'components/Browser';
 import NewWord from 'components/NewWord';
 import EditPage from 'components/EditPage';
 import Detail from 'components/Detail';
+import 'react-calendar-heatmap/dist/styles.css';
 
 export default function App() {
   const [activeItem, setActiveItem] = useState('learn');
   const [isSearchWord, setSearchWord] = useState<boolean>(false);
   const location = useLocation();
-
   React.useEffect(() => {
     if (location.pathname === '/') {
       setActiveItem('home');
@@ -33,6 +33,7 @@ export default function App() {
   }, [location]);
   return (
     <>
+      <div id="cal-heatmap" />
       <MenuBar
         activeItem={activeItem}
         setActiveItem={setActiveItem}

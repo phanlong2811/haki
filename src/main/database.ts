@@ -146,6 +146,15 @@ export function getSizeWords() {
   return data;
 }
 
+export function needReview() {
+  const prompt = fs
+    .readFileSync(path.join(sql, 'words/needReview.sql'))
+    .toString()
+    .trim();
+  const data = db.prepare(prompt).all();
+  return data[0]['COUNT(*)'];
+}
+
 // function for table "explore"
 export function insertWordToExplore(flashCard: IFlashCard) {
   const insert = fs
@@ -184,6 +193,14 @@ export function deleteWordFromExplore(id: number) {
     id,
   });
 }
+export function needExplore() {
+  const prompt = fs
+    .readFileSync(path.join(sql, 'explore/needExplore.sql'))
+    .toString()
+    .trim();
+  const data = db.prepare(prompt).all();
+  return data[0]['COUNT(*)'];
+}
 
 // function for "progress"
 export function addCounterExplore() {
@@ -213,3 +230,15 @@ export function getProgressToday() {
   const data = db.prepare(prompt).all();
   return data;
 }
+
+export function getProgressTable() {
+  const prompt = fs
+    .readFileSync(path.join(sql, 'progress/getTable.sql'))
+    .toString()
+    .trim();
+
+  const data = db.prepare(prompt).all();
+  return data;
+}
+
+console.log(getProgressTable());
