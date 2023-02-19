@@ -24,7 +24,6 @@ export default function Detail() {
         left: 0,
         right: 0,
         padding: '5%',
-        textAlign: 'center',
         minHeight: `95`,
       }}
     >
