@@ -2,6 +2,7 @@ import IFlashCard from 'interfaces/FlashCard';
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Button, Form, Grid, Input } from 'semantic-ui-react';
+import DetailFlashCard from './UI/DetailFlashCard';
 import FlashCard from './UI/FlashCard';
 
 export default function EditPage() {
@@ -50,6 +51,19 @@ export default function EditPage() {
             />
           </Form.Field>
           <Form.Field>
+            <label>Phonetic</label>
+            <Input
+              placeholder="Phonetic"
+              value={flashCard.phonetic}
+              onChange={(e, data) => {
+                setFlashCard({
+                  ...flashCard,
+                  phonetic: data.value,
+                });
+              }}
+            />
+          </Form.Field>
+          <Form.Field>
             <label>Meaning</label>
             <Input
               placeholder="Meaning"
@@ -75,16 +89,29 @@ export default function EditPage() {
               }}
             />
           </Form.Field>
+          <Form.Field>
+            <label>Example</label>
+            <Input
+              placeholder="Example"
+              value={flashCard.example_en}
+              onChange={(e, data) => {
+                setFlashCard({
+                  ...flashCard,
+                  example_en: data.value,
+                });
+              }}
+            />
+          </Form.Field>
           <Button
             as={Link}
             type="submit"
             primary
             to="/browser"
-            onClick={() =>
+            onClick={() => {
               window.electron.ipcRenderer.sendMessage('update-word', [
                 flashCard,
-              ])
-            }
+              ]);
+            }}
           >
             Update
           </Button>
@@ -93,11 +120,13 @@ export default function EditPage() {
 
       <Grid.Column>
         <h2 style={{ color: 'black' }}>Preview</h2>
-        <FlashCard
+        <DetailFlashCard
           word={flashCard.word}
           type={flashCard.type}
           mean={flashCard.mean}
           image={flashCard.image}
+          phonetic={flashCard.phonetic}
+          example_en={flashCard.example_en}
         />
       </Grid.Column>
     </Grid>

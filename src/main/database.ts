@@ -1,10 +1,19 @@
 import path from 'path';
 import fs from 'fs';
 import IFlashCard from 'interfaces/FlashCard';
+import webpackPaths from '../../.erb/configs/webpack.paths';
 
-const sql = path.join(__dirname, './sql');
+const isDevelopment =
+  process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true';
 
-const db = require('better-sqlite3')('database/test.db');
+const sql = isDevelopment
+  ? path.join(webpackPaths.appPath, 'sql')
+  : path.join(__dirname, '../../sql'); // In prod, __dirname is release/app/dist/main. We want release/app/sql
+const db = require('better-sqlite3')(
+  isDevelopment
+    ? path.join(webpackPaths.appPath, 'database/test.db')
+    : path.join(__dirname, '../../database/test.db')
+);
 
 export function createTable() {
   const createWords = fs
@@ -28,11 +37,11 @@ export function insertWordToWords(flashCard: IFlashCard, later: number) {
   db.prepare(insert).run({
     word: flashCard.word,
     type: flashCard.type,
-    phonetic: '',
+    phonetic: flashCard.phonetic,
     mean: flashCard.mean,
     image: flashCard.image,
     audio: '',
-    example_en: '',
+    example_en: flashCard.example_en,
     example_vi: '',
     later,
   });
@@ -123,19 +132,21 @@ export function selectBasedIdFromWords(id: number) {
   });
   return data;
 }
-export function updateWordFromWords(
-  id: number,
-  word: string,
-  type: string,
-  mean: string,
-  image: string
-) {
+export function updateWordFromWords(flashCard: IFlashCard) {
   const prompt = fs
     .readFileSync(path.join(sql, 'words/update.sql'))
     .toString()
     .trim();
 
-  db.prepare(prompt).run({ id, word, type, mean, image });
+  db.prepare(prompt).run({
+    id: flashCard.id,
+    word: flashCard.word,
+    type: flashCard.type,
+    mean: flashCard.mean,
+    image: flashCard.image,
+    phonetic: flashCard.phonetic,
+    example_en: flashCard.example_en,
+  });
 }
 export function getSizeWords() {
   const prompt = fs

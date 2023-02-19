@@ -5,4 +5,6 @@ export default interface IFlashCard {
   mean?: string;
   image?: string;
   later?: number;
+  example_en?: string;
+  phonetic?: string;
 }

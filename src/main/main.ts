@@ -26,7 +26,6 @@ class AppUpdater {
 
 let mainWindow: BrowserWindow | null = null;
 
-
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
   sourceMapSupport.install();

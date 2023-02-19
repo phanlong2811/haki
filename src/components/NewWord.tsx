@@ -3,6 +3,7 @@ import FlashCard from 'components/UI/FlashCard';
 import { useEffect, useState } from 'react';
 import IFlashCard from 'interfaces/FlashCard';
 import { Link, useSearchParams } from 'react-router-dom';
+import DetailFlashCard from './UI/DetailFlashCard';
 
 export default function NewWord() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -13,6 +14,8 @@ export default function NewWord() {
     mean: 'a sample program designed to familiarize users with most programming languages',
     image:
       'https://code.org/images/social-media/helloworld-og-image-1200x630.png',
+    phonetic: '',
+    example_en: '',
   });
   const addWord = () => {
     window.electron.ipcRenderer.sendMessage('insert', [flashCard, 1]);
@@ -56,6 +59,19 @@ export default function NewWord() {
               />
             </Form.Field>
             <Form.Field>
+              <label>Phonetic</label>
+              <Input
+                placeholder="Phonetic"
+                value={flashCard.phonetic}
+                onChange={(e, data) => {
+                  setFlashCard({
+                    ...flashCard,
+                    phonetic: data.value,
+                  });
+                }}
+              />
+            </Form.Field>
+            <Form.Field>
               <label>Meaning</label>
               <Input
                 placeholder="Meaning"
@@ -81,6 +97,19 @@ export default function NewWord() {
                 }}
               />
             </Form.Field>
+            <Form.Field>
+              <label>Example</label>
+              <Input
+                placeholder="Example"
+                value={flashCard.example_en}
+                onChange={(e, data) => {
+                  setFlashCard({
+                    ...flashCard,
+                    example_en: data.value,
+                  });
+                }}
+              />
+            </Form.Field>
             <Button
               as={Link}
               type="submit"
@@ -95,11 +124,13 @@ export default function NewWord() {
 
         <Grid.Column>
           <h2 style={{ color: 'black' }}>Preview</h2>
-          <FlashCard
+          <DetailFlashCard
             word={flashCard.word}
             type={flashCard.type}
             mean={flashCard.mean}
             image={flashCard.image}
+            phonetic={flashCard.phonetic}
+            example_en={flashCard.example_en}
           />
         </Grid.Column>
       </Grid>

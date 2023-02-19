@@ -2,6 +2,7 @@ import FlashCard from 'components/UI/FlashCard';
 import { Button, Card, Divider, Icon, Modal } from 'semantic-ui-react';
 import IMultipleChoice from 'interfaces/MultipleChoice';
 import { useState } from 'react';
+import DetailFlashCard from './UI/DetailFlashCard';
 
 const LATER_CONSTANT = [0, 1, 2, 7, 14, 30];
 export default function MultipleChoice({ flashCard }: IMultipleChoice) {
@@ -100,11 +101,13 @@ export default function MultipleChoice({ flashCard }: IMultipleChoice) {
         open={open}
       >
         <Modal.Content>
-          <FlashCard
+          <DetailFlashCard
             word={flashCard.word}
             type={flashCard.type}
             mean={flashCard.mean}
             image={flashCard.image}
+            example_en={flashCard.example_en}
+            phonetic={flashCard.phonetic}
           />
         </Modal.Content>
         <Modal.Actions>

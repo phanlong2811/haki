@@ -66,13 +66,7 @@ ipcMain.on('get-based-id', (event, arg) => {
 });
 ipcMain.on('update-word', (event, arg) => {
   const flashCard: IFlashCard = arg[0];
-  updateWordFromWords(
-    flashCard.id,
-    flashCard.word,
-    flashCard.type,
-    flashCard.mean,
-    flashCard.image
-  );
+  updateWordFromWords(flashCard);
 });
 ipcMain.on('get-size-words', (event) => {
   const result = getSizeWords();

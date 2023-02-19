@@ -1,7 +1,7 @@
 import IFlashCard from 'interfaces/FlashCard';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import FlashCard from './UI/FlashCard';
+import DetailFlashCard from './UI/DetailFlashCard';
 
 export default function Detail() {
   const params = useParams();
@@ -17,7 +17,7 @@ export default function Detail() {
     }
   });
   return (
-    <FlashCard
+    <DetailFlashCard
       word={flashCard.word}
       type={flashCard.type}
       mean={flashCard.mean}
