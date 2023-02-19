@@ -81,7 +81,8 @@ export default function MultipleChoice({ flashCard }: IMultipleChoice) {
             primary
             onClick={() => {
               window.electron.ipcRenderer.sendMessage('get-review', []);
-              window.electron.ipcRenderer.sendMessage('update-learn', []);
+              if (isCorrect)
+                window.electron.ipcRenderer.sendMessage('update-learn', []);
               setIsEnd(false);
             }}
           >

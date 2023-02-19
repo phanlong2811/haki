@@ -7,7 +7,8 @@ export default function FlashCard({ word, type, mean, image }: IFlashCard) {
       style={{
         position: 'relative',
         backgroundImage: `url(${image})`,
-        backgroundSize: `auto`,
+        backgroundSize: `cover`,
+        backgroundPosition: `center`,
         color: `white`,
         paddingBottom: `53%`,
         display: 'flex',

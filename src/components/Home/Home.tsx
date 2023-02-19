@@ -114,7 +114,7 @@ function DashBoard() {
       </Segment>
       <Segment>
         <Header as="h2" content="Heatmap" />
-        <div style={{ padding: '10px' }}>
+        <Segment style={{ padding: '10px' }}>
           <CalendarHeatmap
             gutterSize={3}
             startDate={new Date().setDate(new Date().getDate() - 364)}
@@ -129,7 +129,7 @@ function DashBoard() {
               }`;
             }}
           />
-        </div>
+        </Segment>
       </Segment>
     </>
   );

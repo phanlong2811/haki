@@ -21,7 +21,8 @@ export default function DetailFlashCard({
       style={{
         position: 'relative',
         backgroundImage: `url(${image})`,
-        backgroundSize: `auto`,
+        backgroundSize: `cover`,
+        backgroundPosition: `center`,
         color: `white`,
         paddingBottom: `53%`,
         display: 'flex',

@@ -10,10 +10,9 @@ export default function NewWord() {
 
   const [flashCard, setFlashCard] = useState<IFlashCard>({
     word: '',
-    type: '(code)',
-    mean: 'a sample program designed to familiarize users with most programming languages',
-    image:
-      'https://code.org/images/social-media/helloworld-og-image-1200x630.png',
+    type: '',
+    mean: '',
+    image: '',
     phonetic: '',
     example_en: '',
   });
