@@ -20,7 +20,7 @@ export default function EditPage() {
   });
 
   return (
-    <Grid columns={1} stackable>
+    <Grid columns={2} stackable>
       <Grid.Column>
         <h2 style={{ color: 'black' }}>Information</h2>
         <Form>
