@@ -176,11 +176,11 @@ export function insertWordToExplore(flashCard: IFlashCard) {
   db.prepare(insert).run({
     word: flashCard.word,
     type: flashCard.type,
-    phonetic: '',
+    phonetic: flashCard.phonetic,
     mean: flashCard.mean,
     image: flashCard.image,
     audio: '',
-    example_en: '',
+    example_en: flashCard.example_en,
     example_vi: '',
   });
 }
@@ -251,5 +251,10 @@ export function getProgressTable() {
   const data = db.prepare(prompt).all();
   return data;
 }
-
-console.log(getProgressTable());
+export function insertProgress() {
+  const prompt = fs
+    .readFileSync(path.join(sql, 'progress/insert.sql'))
+    .toString()
+    .trim();
+  db.prepare(prompt).run();
+}

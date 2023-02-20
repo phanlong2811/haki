@@ -43,32 +43,32 @@ export default function Browser() {
           setSearchPrompt(data.value);
         }}
       />
-      <Table color="blue" celled>
-        <Table.Header fullWidth>
-          <Table.Row>
-            <Table.HeaderCell width={1} />
-            <Table.HeaderCell width={4}>Word</Table.HeaderCell>
-            <Table.HeaderCell width={2}>Type</Table.HeaderCell>
-            <Table.HeaderCell width={6}>Mean</Table.HeaderCell>
-            <Table.HeaderCell width={4}>Deadline</Table.HeaderCell>
-          </Table.Row>
-        </Table.Header>
-        <Table.Body>
-          {tableData.map((data: any) => (
-            <Table.Row key={data.id}>
-              <Table.Cell collapsing>
-                <Button color="teal" as={Link} to={`/browser/edit/${data.id}`}>
-                  Edit
-                </Button>
-              </Table.Cell>
-              <Table.Cell>{data.word}</Table.Cell>
-              <Table.Cell>{data.type}</Table.Cell>
-              <Table.Cell>{data.mean}</Table.Cell>
-              <Table.Cell>{data.deadline}</Table.Cell>
-            </Table.Row>
-          ))}
-        </Table.Body>
-      </Table>
+      {/*<Table color="blue" celled>*/}
+      {/*  <Table.Header fullWidth>*/}
+      {/*    <Table.Row>*/}
+      {/*      <Table.HeaderCell width={1} />*/}
+      {/*      <Table.HeaderCell width={4}>Word</Table.HeaderCell>*/}
+      {/*      <Table.HeaderCell width={2}>Type</Table.HeaderCell>*/}
+      {/*      <Table.HeaderCell width={6}>Mean</Table.HeaderCell>*/}
+      {/*      <Table.HeaderCell width={4}>Deadline</Table.HeaderCell>*/}
+      {/*    </Table.Row>*/}
+      {/*  </Table.Header>*/}
+      {/*  <Table.Body>*/}
+      {/*    {tableData.map((data: any) => (*/}
+      {/*      <Table.Row key={data.id}>*/}
+      {/*        <Table.Cell collapsing>*/}
+      {/*          <Button color="teal" as={Link} to={`/browser/edit/${data.id}`}>*/}
+      {/*            Edit*/}
+      {/*          </Button>*/}
+      {/*        </Table.Cell>*/}
+      {/*        <Table.Cell>{data.word}</Table.Cell>*/}
+      {/*        <Table.Cell>{data.type}</Table.Cell>*/}
+      {/*        <Table.Cell>{data.mean}</Table.Cell>*/}
+      {/*        <Table.Cell>{data.deadline}</Table.Cell>*/}
+      {/*      </Table.Row>*/}
+      {/*    ))}*/}
+      {/*  </Table.Body>*/}
+      {/*</Table>*/}
       <Divider hidden />
       <Card.Group stackable itemsPerRow={3}>
         {tableData.map((data: any) => (

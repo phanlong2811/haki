@@ -17,7 +17,7 @@ export default function NewWord() {
     example_en: '',
   });
   const addWord = () => {
-    window.electron.ipcRenderer.sendMessage('insert', [flashCard, 1]);
+    window.electron.ipcRenderer.sendMessage('insert-explore', [flashCard, 1]);
   };
   useEffect(() => {
     setFlashCard({
@@ -27,7 +27,7 @@ export default function NewWord() {
   }, [searchParams]);
   return (
     <>
-      <Grid columns={2} stackable>
+      <Grid columns={1} stackable>
         <Grid.Column>
           <h2 style={{ color: 'black' }}>Information</h2>
           <Form>

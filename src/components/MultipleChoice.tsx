@@ -24,6 +24,9 @@ export default function MultipleChoice({ flashCard }: IMultipleChoice) {
       flashCard.id,
       isAnswer ? (flashCard.later + 1) % 6 : 1,
     ]);
+    if(isAnswer) {
+      window.electron.ipcRenderer.sendMessage('update-learn', []);
+    }
   };
   const [open, setOpen] = useState(false);
   return (
@@ -81,8 +84,6 @@ export default function MultipleChoice({ flashCard }: IMultipleChoice) {
             primary
             onClick={() => {
               window.electron.ipcRenderer.sendMessage('get-review', []);
-              if (isCorrect)
-                window.electron.ipcRenderer.sendMessage('update-learn', []);
               setIsEnd(false);
             }}
           >
