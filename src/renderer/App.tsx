@@ -12,8 +12,10 @@ import NewWord from 'components/NewWord';
 import EditPage from 'components/EditPage';
 import Detail from 'components/Detail';
 import 'react-calendar-heatmap/dist/styles.css';
+import LoginPage from '../components/LoginPage';
 
 export default function App() {
+  const [isLogin, setLogin] = useState(false);
   const [activeItem, setActiveItem] = useState('learn');
   const [isSearchWord, setSearchWord] = useState<boolean>(false);
   const location = useLocation();
@@ -33,28 +35,35 @@ export default function App() {
   }, [location]);
   return (
     <>
-      <div id="cal-heatmap" />
-      <MenuBar
-        activeItem={activeItem}
-        setActiveItem={setActiveItem}
-        setSearchWord={setSearchWord}
-      />
-      <Divider hidden />
-      <Container>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="review" element={<Review />} />
-          <Route path="explore" element={<Explore />} />
-          <Route path="browser">
-            <Route index element={<Browser />} />
-            <Route path="add" element={<NewWord />} />
-            <Route path="edit/:id" element={<EditPage />} />
-            <Route path="detail/:id" element={<Detail />} />
-          </Route>
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </Container>
-      <SearchWord isSearchWord={isSearchWord} setSearchWord={setSearchWord} />
+      {!isLogin && <LoginPage setLogin={setLogin} />}
+      {isLogin && (
+        <>
+          <MenuBar
+            activeItem={activeItem}
+            setActiveItem={setActiveItem}
+            setSearchWord={setSearchWord}
+          />
+          <Divider hidden />
+          <Container>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="review" element={<Review />} />
+              <Route path="explore" element={<Explore />} />
+              <Route path="browser">
+                <Route index element={<Browser />} />
+                <Route path="add" element={<NewWord />} />
+                <Route path="edit/:id" element={<EditPage />} />
+                <Route path="detail/:id" element={<Detail />} />
+              </Route>
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </Container>
+          <SearchWord
+            isSearchWord={isSearchWord}
+            setSearchWord={setSearchWord}
+          />
+        </>
+      )}
     </>
   );
 }
