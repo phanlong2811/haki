@@ -57,8 +57,10 @@ export default function MenuBar({
           </Menu.Item>
           <Menu.Item
             name="help"
+            as={Link}
             active={activeItem === 'help'}
             onClick={handleItemClick}
+            to="/help"
           />
         </Menu.Menu>
       </Menu>

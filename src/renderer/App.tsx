@@ -6,12 +6,13 @@ import { Container, Divider } from 'semantic-ui-react';
 import Review from 'components/Review';
 import Explore from 'components/Explore';
 import React, { useState } from 'react';
-import SearchWord from 'components/SearchWord';
+import SearchWordPage from 'components/SearchWordPage';
 import Browser from 'components/Browser';
-import NewWord from 'components/NewWord';
+import NewWordPage from 'components/NewWordPage';
 import EditPage from 'components/EditPage';
 import Detail from 'components/Detail';
 import 'react-calendar-heatmap/dist/styles.css';
+import HelpPage from 'components/HelpPage';
 import LoginPage from '../components/LoginPage';
 
 export default function App() {
@@ -31,6 +32,8 @@ export default function App() {
       location.pathname === '/browser/add'
     ) {
       setActiveItem('browser');
+    } else if (location.pathname === '/help') {
+      setActiveItem('help');
     }
   }, [location]);
   return (
@@ -51,14 +54,15 @@ export default function App() {
               <Route path="explore" element={<Explore />} />
               <Route path="browser">
                 <Route index element={<Browser />} />
-                <Route path="add" element={<NewWord />} />
+                <Route path="add" element={<NewWordPage />} />
                 <Route path="edit/:id" element={<EditPage />} />
                 <Route path="detail/:id" element={<Detail />} />
               </Route>
+              <Route path="help" element={<HelpPage />} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </Container>
-          <SearchWord
+          <SearchWordPage
             isSearchWord={isSearchWord}
             setSearchWord={setSearchWord}
           />

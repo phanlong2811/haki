@@ -5,7 +5,7 @@ import IFlashCard from 'interfaces/FlashCard';
 import { Link, useSearchParams } from 'react-router-dom';
 import DetailFlashCard from './UI/DetailFlashCard';
 
-export default function NewWord() {
+export default function NewWordPage() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [flashCard, setFlashCard] = useState<IFlashCard>({

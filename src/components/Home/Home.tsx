@@ -48,12 +48,7 @@ function DashBoard() {
     <>
       <Segment>
         <Header as="h2" content="Today's tasks" />
-        <Progress
-          percent={percent}
-          indicating
-          progress
-          label="premature optimization is the root of all evil"
-        />
+        <Progress percent={percent} indicating progress />
         <Divider hidden />
         <Card.Group centered itemsPerRow={3}>
           <Card>

@@ -7,6 +7,7 @@ import {
   Label,
   Segment,
 } from 'semantic-ui-react';
+import IDetailFlashCard from '../../interfaces/DetailFlashCard';
 
 export default function DetailFlashCard({
   word,
@@ -15,7 +16,7 @@ export default function DetailFlashCard({
   mean,
   image,
   example_en,
-}: IFlashCard) {
+}: IDetailFlashCard) {
   return (
     <div
       style={{

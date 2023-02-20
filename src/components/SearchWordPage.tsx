@@ -99,7 +99,8 @@ interface ISearchWord {
   isSearchWord: boolean;
   setSearchWord: any;
 }
-function SearchWord({ isSearchWord, setSearchWord }: ISearchWord) {
+
+function SearchWordPage({ isSearchWord, setSearchWord }: ISearchWord) {
   return (
     <Modal
       basic
@@ -115,4 +116,4 @@ function SearchWord({ isSearchWord, setSearchWord }: ISearchWord) {
   );
 }
 
-export default SearchWord;
+export default SearchWordPage;
