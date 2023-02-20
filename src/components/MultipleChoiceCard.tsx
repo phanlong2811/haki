@@ -5,7 +5,7 @@ import { useState } from 'react';
 import DetailFlashCard from './UI/DetailFlashCard';
 
 const LATER_CONSTANT = [0, 1, 2, 7, 14, 30];
-export default function MultipleChoice({ flashCard }: IMultipleChoice) {
+export default function MultipleChoiceCard({ flashCard }: IMultipleChoice) {
   window.electron.ipcRenderer.sendMessage('get-multiple', [flashCard.word]);
   const [multipleChoice, setMultipleChoice] = useState([]);
   window.electron.ipcRenderer.once('get-multiple', (arg) => {
@@ -24,7 +24,7 @@ export default function MultipleChoice({ flashCard }: IMultipleChoice) {
       flashCard.id,
       isAnswer ? (flashCard.later + 1) % 6 : 1,
     ]);
-    if(isAnswer) {
+    if (isAnswer) {
       window.electron.ipcRenderer.sendMessage('update-learn', []);
     }
   };

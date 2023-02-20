@@ -1,15 +1,16 @@
-import MultipleChoice from 'components/MultipleChoice';
+import MultipleChoiceCard from 'components/MultipleChoiceCard';
 import IFlashCard from 'interfaces/FlashCard';
 import { useEffect, useState } from 'react';
 import { Message, Segment } from 'semantic-ui-react';
 
 const LATER_CONSTANT = [0, 1, 2, 7, 14, 30];
+
 function Review() {
   useEffect(() => {
     window.electron.ipcRenderer.sendMessage('get-review', []);
   }, []);
   const [flashCard, setFlashCard] = useState<IFlashCard>([]);
- 
+
   const getWord = async (isRemembered: boolean) => {
     try {
       if (flashCard.id) {
@@ -36,7 +37,7 @@ function Review() {
   });
   return (
     <Segment>
-      {flashCard.word && <MultipleChoice flashCard={flashCard} />}
+      {flashCard.word && <MultipleChoiceCard flashCard={flashCard} />}
       {/* {flashCard.word && (
         <>
           <FlashCard
@@ -79,4 +80,5 @@ function Review() {
     </Segment>
   );
 }
+
 export default Review;
