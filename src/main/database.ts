@@ -11,8 +11,8 @@ const sql = isDevelopment
   : path.join(__dirname, '../../sql'); // In prod, __dirname is release/app/dist/main. We want release/app/sql
 const db = require('better-sqlite3')(
   isDevelopment
-    ? path.join(webpackPaths.appPath, 'database/test.db')
-    : path.join(__dirname, '../../database/test.db')
+    ? path.join(webpackPaths.appPath, 'database/sqlite.db')
+    : path.join(__dirname, '../../database/sqlite.db')
 );
 
 export function createTable() {
