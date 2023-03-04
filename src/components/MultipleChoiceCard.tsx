@@ -88,7 +88,9 @@ export default function MultipleChoiceCard({ flashCard }: IMultipleChoice) {
             }}
           >
             <Button.Content visible>
-              Review in {LATER_CONSTANT[flashCard.later]} day
+              {isCorrect
+                ? `Review in ${LATER_CONSTANT[flashCard.later]} day`
+                : `Review again today`}
             </Button.Content>
             <Button.Content hidden>
               <Icon name="arrow right" />
@@ -114,7 +116,11 @@ export default function MultipleChoiceCard({ flashCard }: IMultipleChoice) {
         </Modal.Content>
         <Modal.Actions>
           <Button
-            content={`Review in ${LATER_CONSTANT[flashCard.later]} day`}
+            content={
+              isCorrect
+                ? `Review in ${LATER_CONSTANT[flashCard.later]} day`
+                : `Review again today`
+            }
             labelPosition="right"
             icon="checkmark"
             onClick={() => {
